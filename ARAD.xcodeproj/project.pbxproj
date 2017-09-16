@@ -16,6 +16,7 @@
 		218312A81F6DC27600CC4D3E /* ARADTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218312A71F6DC27600CC4D3E /* ARADTests.swift */; };
 		218312B31F6DC27600CC4D3E /* ARADUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218312B21F6DC27600CC4D3E /* ARADUITests.swift */; };
 		218312C21F6DC2EB00CC4D3E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 218312C11F6DC2EB00CC4D3E /* MapKit.framework */; };
+		219391281F6DEA0C00A3E872 /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 219391271F6DE9E000A3E872 /* Inceptionv3.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		218312B21F6DC27600CC4D3E /* ARADUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARADUITests.swift; sourceTree = "<group>"; };
 		218312B41F6DC27600CC4D3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		218312C11F6DC2EB00CC4D3E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		219391271F6DE9E000A3E872 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				218312961F6DC27600CC4D3E /* Main.storyboard */,
 				218312991F6DC27600CC4D3E /* Assets.xcassets */,
 				2183129B1F6DC27600CC4D3E /* LaunchScreen.storyboard */,
+				219391271F6DE9E000A3E872 /* Inceptionv3.mlmodel */,
 				2183129E1F6DC27600CC4D3E /* Info.plist */,
 			);
 			path = ARAD;
@@ -281,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				218312951F6DC27600CC4D3E /* ViewController.swift in Sources */,
+				219391281F6DEA0C00A3E872 /* Inceptionv3.mlmodel in Sources */,
 				218312911F6DC27600CC4D3E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
