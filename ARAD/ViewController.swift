@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  ARAD
-//
-//  Created by Bhuvan Teja on 9/16/17.
-//  Copyright © 2017 arad. All rights reserved.
-//
-
 import UIKit
 import SceneKit
 import ARKit
