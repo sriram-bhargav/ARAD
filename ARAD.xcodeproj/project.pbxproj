@@ -15,6 +15,7 @@
 		2183129D1F6DC27600CC4D3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2183129B1F6DC27600CC4D3E /* LaunchScreen.storyboard */; };
 		218312A81F6DC27600CC4D3E /* ARADTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218312A71F6DC27600CC4D3E /* ARADTests.swift */; };
 		218312B31F6DC27600CC4D3E /* ARADUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218312B21F6DC27600CC4D3E /* ARADUITests.swift */; };
+		218312C21F6DC2EB00CC4D3E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 218312C11F6DC2EB00CC4D3E /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		218312AE1F6DC27600CC4D3E /* ARADUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARADUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		218312B21F6DC27600CC4D3E /* ARADUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARADUITests.swift; sourceTree = "<group>"; };
 		218312B41F6DC27600CC4D3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		218312C11F6DC2EB00CC4D3E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				218312C21F6DC2EB00CC4D3E /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +86,7 @@
 				218312A61F6DC27600CC4D3E /* ARADTests */,
 				218312B11F6DC27600CC4D3E /* ARADUITests */,
 				2183128E1F6DC27600CC4D3E /* Products */,
+				218312C01F6DC2EB00CC4D3E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,6 +130,14 @@
 				218312B41F6DC27600CC4D3E /* Info.plist */,
 			);
 			path = ARADUITests;
+			sourceTree = "<group>";
+		};
+		218312C01F6DC2EB00CC4D3E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				218312C11F6DC2EB00CC4D3E /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +209,11 @@
 					2183128C1F6DC27600CC4D3E = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					218312A21F6DC27600CC4D3E = {
 						CreatedOnToolsVersion = 9.0;
