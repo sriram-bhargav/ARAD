@@ -98,7 +98,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Get Screen Centre
             let screenCentre : CGPoint = CGPoint(x: self.sceneView.bounds.midX, y: self.sceneView.bounds.midY)
             
-            let results : [ARHitTestResult] = sceneView.hitTest(
+            let results : [ARHitTestResult] = self.sceneView.hitTest(
                 screenCentre, types: [.featurePoint, .existingPlaneUsingExtent])
             
             if let closestResult = results.first {
