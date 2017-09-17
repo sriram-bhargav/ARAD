@@ -696,7 +696,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
         node.geometry?.firstMaterial?.emission.contents = imageLink
         node.geometry?.firstMaterial?.isDoubleSided = true
-        node.scale = SCNVector3Make(0.04, 0.04, 0.04)
+        node.geometry?.firstMaterial?.transparency = 0.85
+        node.scale = SCNVector3Make(0.022, 0.022, 0.022)
         node.name = name
         
         let nodeParent = SCNNode()
@@ -712,9 +713,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //billboardConstraint.freeAxes = SCNBillboardAxis.Y
         
         let node = SCNNode()
-        node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
+        node.geometry = SCNPlane.init(width: 30, height: 15) // better set its size
         node.geometry?.firstMaterial?.emission.contents = imageLink
         node.geometry?.firstMaterial?.isDoubleSided = true
+        node.geometry?.firstMaterial?.transparency = 0.85
         node.scale = SCNVector3Make(0.02, 0.02, 0.02)
         node.name = name
         
