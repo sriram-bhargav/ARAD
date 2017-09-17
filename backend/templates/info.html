@@ -105,7 +105,12 @@ height: 50px;
 <br><br>
 <div class="demo-card-wide mdl-card  a5">
 <h1>{{data["company"]}}</h1>
-	<h2> {{data["name"]}}</h2><h1 class="blue">Delete  &nbsp; &nbsp; &nbsp; View image</h1>
+	<h2> {{data["name"]}}</h2>
+    <h1 class="blue">
+        <a href={{data["delete"]}}>Delete</a>  &nbsp; &nbsp; &nbsp;
+        <a href={{data["link"]}}>Image</a> &nbsp; &nbsp; &nbsp;
+        <a href={{data["snippet"]}}>Snippet</a>
+    </h1>
   </div>
 <div class="demo-card-wide mdl-card  a2">
 <h1>Impressions</h1>
