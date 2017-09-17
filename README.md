@@ -1,2 +1,2 @@
 # ARAD
-# dotslash
+Ads for Augmented Reality Apps!
