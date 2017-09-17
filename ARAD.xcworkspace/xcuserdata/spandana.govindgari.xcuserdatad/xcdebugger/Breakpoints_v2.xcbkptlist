@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARAD/ViewController.swift"
-            timestampString = "527343854.345201"
+            timestampString = "527358957.341035"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "807"
-            endingLineNumber = "807">
+            startingLineNumber = "786"
+            endingLineNumber = "786">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ARAD/ViewController.swift"
-            timestampString = "527343854.346179"
+            timestampString = "527358957.341877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "802"
-            endingLineNumber = "802">
+            startingLineNumber = "786"
+            endingLineNumber = "786">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
