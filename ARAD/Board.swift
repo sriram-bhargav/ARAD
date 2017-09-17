@@ -62,11 +62,11 @@ class Board {
                                   length: length,
                                   chamferRadius: height * 0.1)
             geometry.firstMaterial?.lightingModel = .physicallyBased
-            geometry.firstMaterial?.diffuse.contents = UIImage(named: "Media.scnassets/scuffed-plastic2-alb.png")
-            geometry.firstMaterial?.roughness.contents = UIImage(named: "Media.scnassets/scuffed-plastic-rough.png")
-            geometry.firstMaterial?.metalness.contents = UIImage(named: "Media.scnassets/scuffed-plastic-metal.png")
-            geometry.firstMaterial?.normal.contents = UIImage(named: "Media.scnassets/scuffed-plastic-normal.png")
-            geometry.firstMaterial?.ambientOcclusion.contents = UIImage(named: "Media.scnassets/scuffed-plastic-ao.png")
+            geometry.firstMaterial?.diffuse.contents = UIImage(named: "scuffed-plastic2-alb.png")
+            geometry.firstMaterial?.roughness.contents = UIImage(named: "scuffed-plastic-rough.png")
+            geometry.firstMaterial?.metalness.contents = UIImage(named: "scuffed-plastic-metal.png")
+            geometry.firstMaterial?.normal.contents = UIImage(named: "scuffed-plastic-normal.png")
+            geometry.firstMaterial?.ambientOcclusion.contents = UIImage(named: "scuffed-plastic-ao.png")
             
             let horizontalLineNode = SCNNode(geometry: geometry)
             horizontalLineNode.position = SCNVector3(lineOffset, height * 0.5, 0)

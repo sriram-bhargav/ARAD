@@ -21,11 +21,11 @@ class Figure {
         let geometry = SCNCylinder(radius: Dimensions.FIGURE_RADIUS,
                                    height: Dimensions.SQUARE_SIZE)
         geometry.firstMaterial?.lightingModel = .physicallyBased
-        geometry.firstMaterial?.diffuse.contents = UIImage(named: "Media.scnassets/scuffed-plastic6-alb.png")
-        geometry.firstMaterial?.roughness.contents = UIImage(named: "Media.scnassets/scuffed-plastic-rough.png")
-        geometry.firstMaterial?.metalness.contents = UIImage(named: "Media.scnassets/scuffed-plastic-metal.png")
-        geometry.firstMaterial?.normal.contents = UIImage(named: "Media.scnassets/scuffed-plastic-normal.png")
-        geometry.firstMaterial?.ambientOcclusion.contents = UIImage(named: "Media.scnassets/scuffed-plastic-ao.png")
+        geometry.firstMaterial?.diffuse.contents = UIImage(named: "scuffed-plastic6-alb.png")
+        geometry.firstMaterial?.roughness.contents = UIImage(named: "scuffed-plastic-rough.png")
+        geometry.firstMaterial?.metalness.contents = UIImage(named: "scuffed-plastic-metal.png")
+        geometry.firstMaterial?.normal.contents = UIImage(named: "scuffed-plastic-normal.png")
+        geometry.firstMaterial?.ambientOcclusion.contents = UIImage(named: "scuffed-plastic-ao.png")
         
         let cylinderNode1 = SCNNode(geometry: geometry)
         cylinderNode1.eulerAngles = SCNVector3(-90.0.degreesToRadians, 45.0.degreesToRadians, 0)
@@ -45,11 +45,11 @@ class Figure {
         let geometry = SCNTorus(ringRadius: Dimensions.SQUARE_SIZE * 0.3,
                                 pipeRadius: Dimensions.FIGURE_RADIUS)
         geometry.firstMaterial?.lightingModel = .physicallyBased
-        geometry.firstMaterial?.diffuse.contents = UIImage(named: "Media.scnassets/scuffed-plastic4-alb.png")
-        geometry.firstMaterial?.roughness.contents = UIImage(named: "Media.scnassets/scuffed-plastic-rough.png")
-        geometry.firstMaterial?.metalness.contents = UIImage(named: "Media.scnassets/scuffed-plastic-metal.png")
-        geometry.firstMaterial?.normal.contents = UIImage(named: "Media.scnassets/scuffed-plastic-normal.png")
-        geometry.firstMaterial?.ambientOcclusion.contents = UIImage(named: "Media.scnassets/scuffed-plastic-ao.png")
+        geometry.firstMaterial?.diffuse.contents = UIImage(named: "scuffed-plastic4-alb.png")
+        geometry.firstMaterial?.roughness.contents = UIImage(named: "scuffed-plastic-rough.png")
+        geometry.firstMaterial?.metalness.contents = UIImage(named: "scuffed-plastic-metal.png")
+        geometry.firstMaterial?.normal.contents = UIImage(named: "scuffed-plastic-normal.png")
+        geometry.firstMaterial?.ambientOcclusion.contents = UIImage(named: "scuffed-plastic-ao.png")
         
         // applying PBR: https://medium.com/@avihay/amazing-physically-based-rendering-using-the-new-ios-10-scenekit-2489e43f7021
         

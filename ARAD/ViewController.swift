@@ -25,13 +25,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var adWordsUsed = [String: Bool]()
     var adIds = [String: String]()
+    var adIdSeen = [String: Bool]()
 
     // Try to show ads every 5 mins. Can be adjusted by the developer.
     var delay:Double = 1
     var countdownTimer = Timer()
     // Sends batch requests every 0.5 seconds for 5 seconds
     var adTimer = Timer()
-    var adTimeLimit:Double = 10.0
+    var adTimeLimit:Double = 1.0
     
     
     // Mark - game
@@ -288,7 +289,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         guard let squarePosition = board.squareToPosition[squareId] else { fatalError() }
         
         piece.opacity = 0  // initially invisible
-        // // https://stackoverflow.com/questions/30392579/convert-local-coordinates-to-scene-coordinates-in-scenekit
         piece.position = sceneView.scene.rootNode.convertPosition(squarePosition,
                                                                   from: board.node)
         sceneView.scene.rootNode.addChildNode(piece)
@@ -346,7 +346,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func scheduledTimerWithTimeInterval(){
-        adTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.invokeAdServer), userInfo: nil, repeats: true)
+        adTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.invokeAdServer), userInfo: nil, repeats: true)
     }
     
     func scheduledDelayTimerWithTimeInterval(){
@@ -354,7 +354,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
     @objc func reinitAdServer() {
-        adTimeLimit = 10.0
+        adTimeLimit = 1.0
         scheduledTimerWithTimeInterval()
     }
     
@@ -370,7 +370,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func invokeAdServer() {
-        adTimeLimit -= 0.5
+        adTimeLimit -= 0.1
         if adTimeLimit <= 0 {
             contactARADServer()
             adTimer.invalidate()
@@ -550,8 +550,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             floor.reflectivity = 0
             let material = SCNMaterial()
             material.diffuse.contents = UIColor.white
-            
-            // https://stackoverflow.com/questions/30975695/scenekit-is-it-possible-to-cast-an-shadow-on-an-transparent-object/44799498#44799498
             material.colorBufferWriteMask = SCNColorMask(rawValue: 0)
             floor.materials = [material]
             
@@ -561,7 +559,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             
             self.currentPlane = newPlaneData.0
             restoreGame(at: newPlaneData.1)
-            
             return
         }
         
@@ -580,15 +577,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     }
             }
         }
-        runAd()
+        // runAd()
     }
     
     
     
     func runAd() {
-        print(1)
         latestPrediction = latestPrediction.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-        if latestPrediction != "" && adWordsUsed[latestPrediction] == nil {
+        if latestPrediction != "" && adWordsUsed[latestPrediction] == nil && !tempAdWords.contains(latestPrediction) {
             // Get Screen Centre
             let screenCentre : CGPoint = CGPoint(x: self.sceneView.bounds.midX, y: self.sceneView.bounds.midY)
             let results : [ARHitTestResult] = self.sceneView.hitTest(screenCentre, types: [.featurePoint])
@@ -597,7 +593,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 // Get Coordinates of HitTest
                 let transform : matrix_float4x4 = closestResult.worldTransform
                 let worldCoord: SCNVector3 = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
-                print(latestPrediction)
+                //print(latestPrediction)
                 tempAdWordLocation[latestPrediction] = worldCoord
                 tempAdWords.append(latestPrediction)
             }
@@ -628,7 +624,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let bubbleNode = SCNNode(geometry: bubble)
         // Centre Node - to Centre-Bottom point
         bubbleNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
-        // Reduce default text size
+        // Reduce default image size
         bubbleNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
         
         // CENTRE POINT NODE
@@ -655,6 +651,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func makeRequest(keywords: [String]) {
+        DispatchQueue.global(qos: .default).async {
+            self.getAds(keywords: keywords)
+        }
+    }
+
+    func getAds(keywords: [String]) {
+        //print("keywords")
+        //print(keywords)
         let parameters: Parameters = [
             "tags": keywords
         ]
@@ -675,23 +679,62 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     if results.count > 0 {
                         let firstResult = results[0]
                         let adResult = firstResult as! [String: AnyObject]
-                        print(adResult)
-                        print(adResult["requested_tag"] as! String)
-                        // Create 3D Text
-                        let topAdWord = adResult["requested_tag"] as! String
-                        let node : SCNNode = self.createNewBubbleParentNode(topAdWord)
-                        node.position = self.tempAdWordLocation[topAdWord]!
-                        self.sceneView.scene.rootNode.addChildNode(node)
-                        self.adWordsUsed[topAdWord] = true
+                        print(adResult["link"] as! String)
+                        
                         let adId = adResult["id"] as! String
-                        // Save Ad id for click tracking.
-                        self.adIds.updateValue(adId, forKey: topAdWord)
-                        // Send ARAD server to update impression.
-                        self.captureReaction(adId: adId, isClick: false)
+                        if self.adIdSeen[adId] == nil {
+                            // Create 3D Text
+                            let topAdWord = adResult["requested_tag"] as! String
+                            let imageLink = adResult["link"] as! String
+                            let imageSnippet = adResult["snippet"] as! String
+                            // let node : SCNNode = self.createNewBubbleParentNode(topAdWord)
+                            let node:SCNNode = self.createImageNode(imageLink: imageSnippet)
+                            node.position = self.tempAdWordLocation[topAdWord]!
+                            self.sceneView.scene.rootNode.addChildNode(node)
+                            self.adWordsUsed[topAdWord] = true
+                            // Save Ad id for click tracking.
+                            self.adIds.updateValue(adId, forKey: topAdWord)
+                            self.adIdSeen[adId] = true
+                            // Send ARAD server to update impression.
+                            self.captureReaction(adId: adId, isClick: false)
+                        } else {
+                            print("ad already shown to user, ignore this one!")
+                        }
                     }
                 }
                 self.clearTempAdWords()
         }
+    }
+    
+    func createImageNode(imageLink: String) -> SCNNode {
+        // BILLBOARD CONSTRAINT
+        let billboardConstraint = SCNBillboardConstraint()
+        billboardConstraint.freeAxes = SCNBillboardAxis.Y
+        
+        // BUBBLE-IMAGE
+        let bubble = SCNNode()
+        bubble.geometry = SCNPlane.init(width: 15, height: 15) // better set its size
+        bubble.geometry?.firstMaterial?.diffuse.contents = imageLink
+        bubble.geometry?.firstMaterial?.isDoubleSided = true
+        
+        // let (minBound, maxBound) = bubble.boundingBox
+        // Centre Node - to Centre-Bottom point
+        // bubble.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
+        // Reduce default text size
+        bubble.scale = SCNVector3Make(0.02, 0.02, 0.02)
+        
+        // CENTRE POINT NODE
+        let sphere = SCNSphere(radius: 0.005)
+        sphere.firstMaterial?.diffuse.contents = UIColor.cyan
+        let sphereNode = SCNNode(geometry: sphere)
+        
+        // BUBBLE PARENT NODE
+        let bubbleNodeParent = SCNNode()
+        bubbleNodeParent.addChildNode(bubble)
+        bubbleNodeParent.addChildNode(sphereNode)
+        bubbleNodeParent.constraints = [billboardConstraint]
+        
+        return bubbleNodeParent
     }
     
     func classificationCompleteHandler(request: VNRequest, error: Error?) {
@@ -727,11 +770,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 var objectName = line.components(separatedBy: " - ")
                 objectName[0] = objectName[0].trimmingCharacters(in: .whitespacesAndNewlines)
                 objectName[1] = objectName[1].trimmingCharacters(in: .whitespacesAndNewlines)
-                print(objectName[0], objectName[1])
                 let doubleScore = (objectName[1] as NSString).doubleValue
                 if doubleScore >= self.modelThreshold {
-                    self.latestPrediction = objectName[0]
-                    print(self.latestPrediction)
+                    // print(objectName[0], objectName[1])
+                    self.latestPrediction = objectName[0].components(separatedBy: ",")[0]
+                    // print(self.latestPrediction)
                 }
             }
         }
