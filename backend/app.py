@@ -8,6 +8,8 @@ import json
 from flask import Response
 from flask import render_template
 from flask import request
+from flask import url_for
+
 import utils
 from  db import RedisTable
 
@@ -20,7 +22,6 @@ LOG = app.logger
 LOG.print_exc = lambda msg: print_exc(LOG, msg)
 LOG.info("log started")
 
-
 config = utils.ReadConfig("arad.cfg")
 db = RedisTable(config)
 
@@ -29,6 +30,7 @@ db = RedisTable(config)
 @app.route('/index')
 def IndexHandler():
     return 'Im alive'
+
 
 @app.route('/getads', methods=['POST', 'GET'])
 def GetAds():
@@ -57,16 +59,18 @@ def AddCreative():
     ret = db.AddCreative(data)
     return Response(json.dumps(ret), mimetype='application/json')
 
+
 @app.route('/reaction', methods=['POST', 'GET'])
 def LogReaction():
     data = json.loads(request.data)
     LOG.info("SeenCreative:" + str(data))
     if not data.has_key("id") or not data.has_key("is_click"):
         ret = {'message': "send id and is_click", "success": False}
-    else :
+    else:
         db.LogReaction(data["id"], data["is_click"])
         ret = {"success": True}
     return Response(json.dumps(ret), mimetype='application/json')
+
 
 @app.route('/creative-info', methods=['POST', 'GET'])
 def CreativeInfo():
@@ -74,21 +78,48 @@ def CreativeInfo():
     LOG.info("LogReaction:" + str(data))
     if not data.has_key("id"):
         ret = {'message': "Id required", "success": False}
-    else :
+    else:
         ret = db.CreativeInfo(data["id"])
         ret["success"] = True
     return Response(json.dumps(ret), mimetype='application/json')
 
 
+@app.route('/arad/delete/<id>', methods=['GET'])
+def DummyDelete(id):
+    return Delete(id)
+
+@app.route('/delete/<id>', methods=['GET'])
+def Delete(id):
+    return Response(json.dumps({"success" : db.RemCreative(id)}), mimetype='application/json')
+
+
+
+@app.route('/arad/dashboard/<id>', methods=['GET'])
+def DummyDashboard(id):
+    return Dashboard(id)
+
 @app.route('/dashboard/<id>', methods=['GET'])
 def Dashboard(id):
+    LOG.info(id)
     data = db.CreativeInfo(id)
+    LOG.info(data)
+    data["delete"] = url_for('DummyDelete', id=id)
+    LOG.info(data)
     return render_template('info.html', data=data)
 
 
 @app.route('/new', methods=['POST', 'GET'])
 def Create():
     return render_template('create.html')
+
+@app.route('/list', methods=['POST', 'GET'])
+def List():
+    entries = db.GetAll()
+    for entry in entries:
+        print entry
+        entry['dashboard'] = url_for('DummyDashboard', id=entry["id"])
+    return render_template('list.html', entries=entries)
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=9856)

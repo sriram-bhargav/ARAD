@@ -23,7 +23,7 @@ class RedisTable():
         self.creatives.set(id, json.dumps(data))
         for tag in data["tags"]:
             self.tag_to_creative.sadd(tag, id)
-        return {"id": id, "success" : True}
+        return {"id": id, "success": True}
 
     def TagToCreative(self, tag):
         creatives = self.tag_to_creative.smembers(tag)
@@ -40,13 +40,20 @@ class RedisTable():
 
     def IdToCreative(self, id):
         data = self.creatives.get(id)
-        return json.loads(data)
+        if not data: return data
+        creative = json.loads(data)
+        if "snippet" not in creative and creative["link"].endswith("-big.png"):
+            creative["snippet"] = creative["link"].replace("-big.png", "-small.png")
+        return creative
 
     def RemCreative(self, id):
         data = self.IdToCreative(id)
+        if not data:
+            return False
         self.creatives.delete(id)
         for tag in data["tags"]:
             self.tag_to_creative.srem(tag, id)
+        return True
 
     def LogReaction(self, id, is_click):
         hmkey = "click" if is_click else "impressions"
@@ -58,6 +65,19 @@ class RedisTable():
     def CreativeInfo(self, id):
         clicks, impressions = [0 if not x else x for x in self.conversions.hmget(id, "click", "impressions")]
         creative = self.IdToCreative(id)
+        if not creative:
+            return {}
         creative["clicks"] = clicks
         creative["impressions"] = impressions
         return creative
+
+    def GetAll(self):
+        keys = self.creatives.keys("*")
+        data = self.creatives.mget(keys)
+
+        def updateInfo(key, val):
+            ret = json.loads(val)
+            ret["id"] = key
+            return ret
+
+        return [updateInfo(k, v) for k, v in zip(keys, data)]
