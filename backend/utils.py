@@ -1,6 +1,5 @@
 import ConfigParser
 import random
-
 import time
 
 
@@ -13,7 +12,7 @@ def ReadConfig(configfile):
 def CheckCreativeRequest(data):
     valid_tags = data.has_key("tags") and len(data["tags"])
     valid_image = data.has_key("link")
-    return valid_tags  and valid_image
+    return valid_tags and valid_image
 
 
 def NewId():
