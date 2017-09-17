@@ -110,7 +110,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             let screenCentre : CGPoint = CGPoint(x: self.sceneView.bounds.midX, y: self.sceneView.bounds.midY)
             
             let results : [ARHitTestResult] = self.sceneView.hitTest(
-                screenCentre, types: [.featurePoint, .existingPlaneUsingExtent])
+                screenCentre, types: [.featurePoint])
             
             if let closestResult = results.first {
                 // Get Coordinates of HitTest
