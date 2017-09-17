@@ -664,10 +664,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                                 let topAdWord = adResult["requested_tag"] as! String
                                 let imageLink = adResult["link"] as! String
                                 let imageSnippet = adResult["snippet"] as! String
-                                let node1:SCNNode = self.createImageNode(imageLink: imageLink, name: "main", id: adId)
+                                let node1:SCNNode = self.createImageNode1(imageLink: imageLink, name: "main", id: adId)
                                 node1.position = self.tempAdWordLocation[topAdWord]!
                                 node1.isHidden = true
-                                let node2:SCNNode = self.createImageNode(imageLink: imageSnippet, name: "snippet", id: adId + "_snippet")
+                                let node2:SCNNode = self.createImageNode2(imageLink: imageSnippet, name: "snippet", id: adId + "_snippet")
                                 node2.position = node1.position
                                 self.sceneView.scene.rootNode.addChildNode(node1)
                                 self.sceneView.scene.rootNode.addChildNode(node2)
@@ -687,12 +687,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func createImageNode(imageLink: String, name: String, id: String) -> SCNNode {
-        let billboardConstraint = SCNBillboardConstraint()
-        billboardConstraint.freeAxes = SCNBillboardAxis.Y
+    func createImageNode1(imageLink: String, name: String, id: String) -> SCNNode {
+        //let billboardConstraint = SCNBillboardConstraint()
+        //billboardConstraint.freeAxes = SCNBillboardAxis.Y
 
         let node = SCNNode()
         node.geometry = SCNPlane.init(width: 15, height: 15) // better set its size
+        node.geometry?.firstMaterial?.diffuse.contents = imageLink
+        node.geometry?.firstMaterial?.isDoubleSided = true
+        node.scale = SCNVector3Make(0.04, 0.04, 0.04)
+        node.name = name
+        
+        let nodeParent = SCNNode()
+        nodeParent.addChildNode(node)
+        //nodeParent.constraints = [billboardConstraint]
+        nodeParent.name = id
+        // nodeParent.name = name
+        return nodeParent
+    }
+    
+    func createImageNode2(imageLink: String, name: String, id: String) -> SCNNode {
+        //let billboardConstraint = SCNBillboardConstraint()
+        //billboardConstraint.freeAxes = SCNBillboardAxis.Y
+        
+        let node = SCNNode()
+        node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
         node.geometry?.firstMaterial?.diffuse.contents = imageLink
         node.geometry?.firstMaterial?.isDoubleSided = true
         node.scale = SCNVector3Make(0.02, 0.02, 0.02)
@@ -700,7 +719,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let nodeParent = SCNNode()
         nodeParent.addChildNode(node)
-        nodeParent.constraints = [billboardConstraint]
+        //nodeParent.constraints = [billboardConstraint]
         nodeParent.name = id
         // nodeParent.name = name
         return nodeParent
