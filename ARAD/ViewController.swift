@@ -420,9 +420,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                                                                 revertDrag()
                                                                 return
             }
-            
-            
-            
+
             // move in visual model
             let toSquareId = "\(square.0.0)x\(square.0.1)"
             figures[toSquareId] = figures["\(draggingFrom.x)x\(draggingFrom.y)"]
@@ -582,7 +580,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     }
             }
         }
-        //runAd()
+        runAd()
     }
     
     
