@@ -20,14 +20,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var visionRequests = [VNRequest]()
     let dispatchQueue = DispatchQueue(label: "") // A Serial Queue
-    let modelThreshold:Double = 0.2
+    let modelThreshold:Double = 0.20
     @IBOutlet weak var debugTextView: UITextView!
     
     var adWordsUsed = [String: Bool]()
     var adIds = [String: String]()
 
     // Try to show ads every 5 mins. Can be adjusted by the developer.
-    var delay:Double = 150.0
+    var delay:Double = 1
     var countdownTimer = Timer()
     // Sends batch requests every 0.5 seconds for 5 seconds
     var adTimer = Timer()
@@ -346,7 +346,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func scheduledTimerWithTimeInterval(){
-        adTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.invokeAdServer), userInfo: nil, repeats: true)
+        adTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.invokeAdServer), userInfo: nil, repeats: true)
     }
     
     func scheduledDelayTimerWithTimeInterval(){
@@ -354,7 +354,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
     @objc func reinitAdServer() {
-        adTimeLimit = 5.0
+        adTimeLimit = 10.0
         scheduledTimerWithTimeInterval()
     }
     
@@ -719,13 +719,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.debugTextView.text = debugText
             
             // Store the latest prediction
-            var objectName:String = ""
-            objectName = classifications.components(separatedBy: " - ")[0]
-            objectName = objectName.components(separatedBy: ",")[0]
-            if let doubleScore = Double(classifications.components(separatedBy: " - ")[1]) {
+            var lines: [String] = []
+            classifications.enumerateLines { line, _ in
+                lines.append(line)
+            }
+            for line in lines {
+                var objectName = line.components(separatedBy: " - ")
+                objectName[0] = objectName[0].trimmingCharacters(in: .whitespacesAndNewlines)
+                objectName[1] = objectName[1].trimmingCharacters(in: .whitespacesAndNewlines)
+                print(objectName[0], objectName[1])
+                let doubleScore = (objectName[1] as NSString).doubleValue
                 if doubleScore >= self.modelThreshold {
-                    self.latestPrediction = objectName
-                    print(objectName)
+                    self.latestPrediction = objectName[0]
+                    print(self.latestPrediction)
                 }
             }
         }
@@ -736,5 +742,13 @@ extension UIFont {
     func withTraits(traits:UIFontDescriptorSymbolicTraits...) -> UIFont {
         let descriptor = self.fontDescriptor.withSymbolicTraits(UIFontDescriptorSymbolicTraits(traits))
         return UIFont(descriptor: descriptor!, size: 0)
+    }
+}
+
+extension String {
+    var lines: [String] {
+        var result: [String] = []
+        enumerateLines { line, _ in result.append(line) }
+        return result
     }
 }
