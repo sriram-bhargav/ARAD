@@ -15,16 +15,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var debugTextView: UITextView!
     
     var adWordsUsed = [String: Bool]()
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.scheduledTimerWithTimeInterval()
         sceneView.delegate = self
         sceneView.showsStatistics = true
         let scene = SCNScene()
         sceneView.scene = scene
         sceneView.autoenablesDefaultLighting = true
 
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognize:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
         view.addGestureRecognizer(tap)
 
         // load model and init CoreML.
@@ -37,6 +39,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         visionRequests = [classificationRequest]
 
         loopCoreMLUpdate()
+    }
+    
+    func scheduledTimerWithTimeInterval(){
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
+    }
+
+    @objc func updateCounting(){
+        runAd()
     }
     
     func loopCoreMLUpdate() {
@@ -89,7 +99,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return true
     }
 
-    @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
+    @objc func handleTap(gestureRecognizer: UITapGestureRecognizer) {
         runAd()
     }
     
