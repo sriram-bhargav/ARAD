@@ -324,7 +324,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let scene = SCNScene()
         sceneView.scene = scene
-        sceneView.autoenablesDefaultLighting = true
+        sceneView.autoenablesDefaultLighting = false
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
         view.addGestureRecognizer(tap)
@@ -506,7 +506,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         DispatchQueue.main.async {
             // Do any desired updates to SceneKit here.
             // If light estimation is enabled, update the intensity of the model's lights and the environment map
-            if let lightEstimate = self.sceneView.session.currentFrame?.lightEstimate {
+             if let lightEstimate = self.sceneView.session.currentFrame?.lightEstimate {
                 
                 // Apple divived the ambientIntensity by 40, I find that, atleast with the materials used
                 // here that it's a big too bright, so I increased to to 50..
@@ -544,6 +544,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @objc func handleTap(gestureRecognizer: UITapGestureRecognizer) {
         // Do hit test to find node.
+        self.sendVisionRequests = true
         if adIdSeen.count > 0 {
             let location: CGPoint = gestureRecognizer.location(in: self.view)
             let hits = self.sceneView.hitTest(location, options: nil)
@@ -556,9 +557,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     }
                 }
             }
+            sendVisionRequests = false
         }
 
-        self.sendVisionRequests = true
         let location = gestureRecognizer.location(in: sceneView)
         
         // tap to place board..
