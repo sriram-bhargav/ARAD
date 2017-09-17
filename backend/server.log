@@ -1,1 +1,606 @@
 2017-09-16 13:50:58,722 - __main__ - INFO - log started
+2017-09-16 15:39:16,590 - __main__ - INFO - log started
+2017-09-16 15:39:33,895 - __main__ - INFO - log started
+2017-09-16 15:40:01,400 - __main__ - INFO - log started
+2017-09-16 15:40:41,768 - __main__ - INFO - log started
+2017-09-16 15:56:54,213 - __main__ - INFO - log started
+2017-09-16 15:58:14,290 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 29, in random_slack_handler
+    LOG.info("hello : " + json.loads(request.data))
+TypeError: cannot concatenate 'str' and 'dict' objects
+2017-09-16 15:58:29,284 - __main__ - INFO - log started
+2017-09-16 15:58:39,824 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 29, in random_slack_handler
+    LOG.info("hello : " + json.loads(request.data))
+TypeError: cannot concatenate 'str' and 'dict' objects
+2017-09-16 16:00:04,949 - __main__ - INFO - log started
+2017-09-16 16:00:24,224 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 29, in random_slack_handler
+    LOG.info("hello : " + json.loads(request.get_json()))
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+TypeError: expected string or buffer
+2017-09-16 16:04:10,439 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 29, in random_slack_handler
+    LOG.info("hello : " + json.loads(request.get_json()))
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+TypeError: expected string or buffer
+2017-09-16 16:04:58,328 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 29, in random_slack_handler
+    LOG.info("hello : " + json.loads(request.get_json()))
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+TypeError: expected string or buffer
+2017-09-16 16:05:19,202 - __main__ - INFO - log started
+2017-09-16 16:05:23,847 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 30, in random_slack_handler
+    LOG.info("hello : " + json.loads(request.get_json()))
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+TypeError: expected string or buffer
+2017-09-16 16:06:34,977 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 30, in random_slack_handler
+    LOG.info("hello : " + json.loads(request.get_json()))
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+TypeError: expected string or buffer
+2017-09-16 16:07:33,927 - __main__ - INFO - log started
+2017-09-16 16:07:41,497 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 29, in random_slack_handler
+    data = json.load(request.data)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 287, in load
+    return loads(fp.read(),
+AttributeError: 'str' object has no attribute 'read'
+2017-09-16 16:07:42,892 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 29, in random_slack_handler
+    data = json.load(request.data)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 287, in load
+    return loads(fp.read(),
+AttributeError: 'str' object has no attribute 'read'
+2017-09-16 16:07:50,315 - __main__ - INFO - log started
+2017-09-16 16:07:56,365 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 29, in random_slack_handler
+    data = json.load(request.data)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 287, in load
+    return loads(fp.read(),
+AttributeError: 'str' object has no attribute 'read'
+2017-09-16 16:08:19,565 - __main__ - INFO - log started
+2017-09-16 16:08:27,098 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 29, in random_slack_handler
+    data = json.load(request.data)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 287, in load
+    return loads(fp.read(),
+AttributeError: 'str' object has no attribute 'read'
+2017-09-16 16:08:42,018 - __main__ - INFO - log started
+2017-09-16 16:08:46,928 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 29, in random_slack_handler
+    data = json.load(request.data)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 287, in load
+    return loads(fp.read(),
+AttributeError: 'str' object has no attribute 'read'
+2017-09-16 16:09:05,947 - __main__ - INFO - log started
+2017-09-16 16:09:14,226 - __main__ - INFO - hello : laptop,iphone
+2017-09-16 16:10:46,475 - __main__ - INFO - log started
+2017-09-16 16:10:53,414 - __main__ - INFO - hello : laptop,iphone
+2017-09-16 16:11:56,453 - __main__ - INFO - log started
+2017-09-16 16:12:10,076 - __main__ - INFO - hello : laptop,iphone
+2017-09-16 16:35:09,373 - __main__ - INFO - log started
+2017-09-16 16:35:53,889 - __main__ - INFO - {u'tags': [u'laptop', u'iphone']}
+2017-09-16 16:35:53,889 - __main__ - INFO - hello : laptop,iphone
+2017-09-16 18:58:02,273 - __main__ - INFO - log started
+2017-09-16 18:58:32,453 - __main__ - INFO - log started
+2017-09-16 19:00:04,115 - __main__ - INFO - log started
+2017-09-16 19:02:12,913 - __main__ - INFO - log started
+2017-09-16 19:03:12,890 - __main__ - INFO - {u'text': u'Long text', u'tags': [u'laptop', u'apple', u'computer'], u'link': u'https://store.storeimages.cdn-apple.com/4974/as-images.apple.com/is/image/AppleInc/aos/published/images/m/ac/macbook/select/macbook-select-space-gray-201706?wid=452&hei=420&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=1497296733186', u'title': u'Hello', u'format': u'IMAGE'}
+2017-09-16 19:06:23,040 - __main__ - INFO - {u'text': u'Long text', u'tags': [u'iphone', u'phone', u'apple'], u'link': u'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiF3N2IkavWAhVIylQKHfO_ClYQjRwIBw&url=http%3A%2F%2Flbc9.com%2Fiphonex%2F&psig=AFQjCNG9uG48x9LaSSy0Eu4Tf6uREdxNRA&ust=1505700350417928', u'title': u'Hello', u'format': u'IMAGE'}
+2017-09-16 19:08:22,728 - __main__ - INFO - {u'tags': [u'laptop', u'iphone']}
+2017-09-16 19:08:22,729 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 57, in GetAds
+    creative = db.TagToCreative(tag)
+  File "/Users/stps/code/ARAD/backend/db.py", line 28, in TagToCreative
+    return None
+TypeError: 'set' object does not support indexing
+2017-09-16 19:08:37,463 - __main__ - INFO - {u'tags': [u'laptop', u'iphone', u'random']}
+2017-09-16 19:08:37,464 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 57, in GetAds
+    creative = db.TagToCreative(tag)
+  File "/Users/stps/code/ARAD/backend/db.py", line 28, in TagToCreative
+    return None
+TypeError: 'set' object does not support indexing
+2017-09-16 19:09:04,738 - __main__ - INFO - log started
+2017-09-16 19:09:09,997 - __main__ - INFO - {u'tags': [u'laptop', u'iphone', u'random']}
+2017-09-16 19:09:10,000 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 57, in GetAds
+    creative = db.TagToCreative(tag)
+  File "/Users/stps/code/ARAD/backend/db.py", line 29, in TagToCreative
+    return self.IdToCreative(creatives[0])
+TypeError: 'set' object does not support indexing
+2017-09-16 19:09:35,261 - __main__ - INFO - log started
+2017-09-16 19:09:39,498 - __main__ - INFO - {u'tags': [u'laptop', u'iphone', u'random']}
+2017-09-16 19:11:06,075 - __main__ - INFO - log started
+2017-09-16 19:11:11,712 - __main__ - INFO - {u'tags': [u'laptop', u'iphone', u'random']}
+2017-09-16 19:11:11,714 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 57, in GetAds
+    creative = db.TagToCreative(tag)
+  File "/Users/stps/code/ARAD/backend/db.py", line 30, in TagToCreative
+    creative["all_tags"] = creative["tags"]
+TypeError: string indices must be integers, not str
+2017-09-16 19:11:46,137 - __main__ - INFO - log started
+2017-09-16 19:11:51,176 - __main__ - INFO - {u'tags': [u'laptop', u'iphone', u'random']}
+2017-09-16 19:11:51,178 - __main__ - ERROR - Exception on /getads [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 57, in GetAds
+    creative = db.TagToCreative(tag)
+  File "/Users/stps/code/ARAD/backend/db.py", line 31, in TagToCreative
+    creative["all_tags"] = creative["tags"]
+TypeError: string indices must be integers, not str
+2017-09-16 19:12:34,827 - __main__ - INFO - log started
+2017-09-16 19:12:42,226 - __main__ - INFO - {u'tags': [u'laptop', u'iphone', u'random']}
+2017-09-16 19:13:08,963 - __main__ - INFO - log started
+2017-09-16 19:13:13,126 - __main__ - INFO - {u'tags': [u'laptop', u'iphone', u'random']}
+2017-09-16 19:15:35,316 - __main__ - INFO - log started
+2017-09-16 20:49:28,736 - __main__ - INFO - log started
+2017-09-16 20:49:38,455 - __main__ - INFO - SeenCreative:{u'text': u'Long text', u'tags': [u'iphone', u'phone', u'apple'], u'link': u'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiF3N2IkavWAhVIylQKHfO_ClYQjRwIBw&url=http%3A%2F%2Flbc9.com%2Fiphonex%2F&psig=AFQjCNG9uG48x9LaSSy0Eu4Tf6uREdxNRA&ust=1505700350417928', u'title': u'Hello', u'format': u'IMAGE'}
+2017-09-16 20:49:53,761 - __main__ - INFO - log started
+2017-09-16 20:49:57,447 - __main__ - INFO - SeenCreative:{u'text': u'Long text', u'tags': [u'iphone', u'phone', u'apple'], u'link': u'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiF3N2IkavWAhVIylQKHfO_ClYQjRwIBw&url=http%3A%2F%2Flbc9.com%2Fiphonex%2F&psig=AFQjCNG9uG48x9LaSSy0Eu4Tf6uREdxNRA&ust=1505700350417928', u'title': u'Hello', u'format': u'IMAGE'}
+2017-09-16 20:51:02,028 - __main__ - INFO - {u'tags': [u'laptop', u'computer', u'notebook']}
+2017-09-16 20:51:19,918 - __main__ - INFO - AddCreative:{u'text': u'Long text', u'tags': [u'iphone', u'phone', u'apple'], u'link': u'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiF3N2IkavWAhVIylQKHfO_ClYQjRwIBw&url=http%3A%2F%2Flbc9.com%2Fiphonex%2F&psig=AFQjCNG9uG48x9LaSSy0Eu4Tf6uREdxNRA&ust=1505700350417928', u'title': u'Hello', u'format': u'IMAGE'}
+2017-09-16 20:51:22,693 - __main__ - INFO - {u'tags': [u'laptop', u'computer', u'notebook']}
+2017-09-16 20:51:30,078 - __main__ - INFO - {u'tags': [u'iphone', u'computer', u'notebook']}
+2017-09-16 20:52:06,918 - __main__ - ERROR - Exception on /reaction [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 61, in LogReaction
+    data = json.loads(request.data)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 380, in raw_decode
+    obj, end = self.scan_once(s, idx)
+ValueError: Expecting property name: line 3 column 5 (char 45)
+2017-09-16 20:52:09,129 - __main__ - ERROR - Exception on /reaction [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 61, in LogReaction
+    data = json.loads(request.data)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 339, in loads
+    return _default_decoder.decode(s)
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 364, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/local/Cellar/python/2.7.12/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 380, in raw_decode
+    obj, end = self.scan_once(s, idx)
+ValueError: Expecting property name: line 3 column 5 (char 45)
+2017-09-16 20:52:14,870 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92'}
+2017-09-16 20:52:28,503 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': True}
+2017-09-16 20:52:28,504 - __main__ - ERROR - Exception on /reaction [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 66, in LogReaction
+    db.LogReaction(data["id"], data["is_click"])
+  File "/Users/stps/code/ARAD/backend/db.py", line 55, in LogReaction
+    old_val = int(0 if not old_val else old_val[0])
+TypeError: int() argument must be a string or a number, not 'NoneType'
+2017-09-16 20:52:49,100 - __main__ - INFO - log started
+2017-09-16 20:52:55,271 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': True}
+2017-09-16 20:52:55,274 - __main__ - ERROR - Exception on /reaction [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 66, in LogReaction
+    db.LogReaction(data["id"], data["is_click"])
+  File "/Users/stps/code/ARAD/backend/db.py", line 56, in LogReaction
+    old_val = int(0 if not old_val else old_val[0])
+TypeError: int() argument must be a string or a number, not 'NoneType'
+2017-09-16 20:53:23,962 - __main__ - INFO - log started
+2017-09-16 20:53:28,763 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': True}
+2017-09-16 20:53:31,778 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': True}
+2017-09-16 20:53:32,702 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': True}
+2017-09-16 20:53:39,650 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 20:53:40,165 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 20:53:40,585 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 20:53:43,073 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 20:54:30,393 - __main__ - INFO - log started
+2017-09-16 20:54:51,745 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 20:54:51,748 - __main__ - ERROR - Exception on /reaction [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 66, in LogReaction
+    db.LogReaction(data["id"], data["is_click"])
+  File "/Users/stps/code/ARAD/backend/db.py", line 54, in LogReaction
+    old_val = self.conversions.hmget(id, hmkey)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/client.py", line 2016, in hmget
+    return self.execute_command('HMGET', name, *args)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/client.py", line 667, in execute_command
+    connection.send_command(*args)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/connection.py", line 585, in send_packed_command
+    self.connect()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/connection.py", line 493, in connect
+    self.on_connect()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/connection.py", line 567, in on_connect
+    if nativestr(self.read_response()) != 'OK':
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: invalid DB index
+2017-09-16 20:54:52,224 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 20:54:52,225 - __main__ - ERROR - Exception on /reaction [POST]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 66, in LogReaction
+    db.LogReaction(data["id"], data["is_click"])
+  File "/Users/stps/code/ARAD/backend/db.py", line 54, in LogReaction
+    old_val = self.conversions.hmget(id, hmkey)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/client.py", line 2016, in hmget
+    return self.execute_command('HMGET', name, *args)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/client.py", line 667, in execute_command
+    connection.send_command(*args)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/connection.py", line 585, in send_packed_command
+    self.connect()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/connection.py", line 493, in connect
+    self.on_connect()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/connection.py", line 567, in on_connect
+    if nativestr(self.read_response()) != 'OK':
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: invalid DB index
+2017-09-16 20:55:13,889 - __main__ - INFO - log started
+2017-09-16 20:55:19,617 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 20:55:21,360 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 20:55:25,482 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': True}
+2017-09-16 21:18:04,738 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': True}
+2017-09-16 21:38:59,654 - __main__ - INFO - log started
+2017-09-16 21:39:30,367 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92'}
+2017-09-16 21:39:36,850 - __main__ - INFO - LogReaction:{u'id': u'65251505620279.92'}
+2017-09-16 21:40:13,464 - __main__ - INFO - log started
+2017-09-16 21:40:20,194 - __main__ - INFO - LogReaction:{u'id': u'65251505620279.92'}
+2017-09-16 21:40:26,741 - __main__ - INFO - LogReaction:{u'id': u'65251505620279.92'}
+2017-09-16 21:40:31,680 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': True}
+2017-09-16 21:40:32,223 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': True}
+2017-09-16 21:40:36,182 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 21:40:36,588 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 21:40:40,365 - __main__ - INFO - LogReaction:{u'id': u'65251505620279.92'}
+2017-09-16 21:40:57,064 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 21:40:57,318 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 21:40:57,522 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': False}
+2017-09-16 21:41:01,168 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': True}
+2017-09-16 21:41:01,330 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': True}
+2017-09-16 21:41:01,506 - __main__ - INFO - SeenCreative:{u'id': u'65251505620279.92', u'is_click': True}
+2017-09-16 21:41:05,803 - __main__ - INFO - LogReaction:{u'id': u'65251505620279.92'}
+2017-09-16 21:41:22,156 - __main__ - INFO - log started
+2017-09-16 21:42:19,808 - __main__ - INFO - log started
+2017-09-16 21:42:24,789 - __main__ - INFO - LogReaction:{u'id': u'65251505620279.92'}
+2017-09-16 21:42:25,479 - __main__ - INFO - LogReaction:{u'id': u'65251505620279.92'}
+2017-09-16 21:42:26,187 - __main__ - INFO - LogReaction:{u'id': u'65251505620279.92'}
+2017-09-16 21:44:28,948 - __main__ - INFO - log started
+2017-09-16 21:52:30,696 - __main__ - INFO - AddCreative:{u'text': u'Long text', u'tags': [u'iphone', u'phone', u'apple'], u'link': u'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiF3N2IkavWAhVIylQKHfO_ClYQjRwIBw&url=http%3A%2F%2Flbc9.com%2Fiphonex%2F&psig=AFQjCNG9uG48x9LaSSy0Eu4Tf6uREdxNRA&ust=1505700350417928', u'title': u'Hello', u'format': u'IMAGE'}
+2017-09-16 21:52:42,197 - __main__ - INFO - {u'tags': [u'iphone', u'computer', u'notebook']}
+2017-09-16 22:04:33,367 - __main__ - INFO - LogReaction:{u'id': u'65251505620279.92'}
+2017-09-16 23:21:16,560 - __main__ - INFO - log started
+2017-09-16 23:32:51,661 - __main__ - INFO - log started
+2017-09-16 23:32:57,267 - __main__ - INFO - log started
+2017-09-16 23:33:19,261 - __main__ - INFO - log started
+2017-09-17 00:06:58,716 - __main__ - INFO - log started
+2017-09-17 00:08:33,747 - __main__ - INFO - log started
+2017-09-17 00:09:14,782 - __main__ - INFO - log started
+2017-09-17 00:09:35,278 - __main__ - INFO - AddCreative:{u'company': u'1', u'link': u'asa.com', u'name': u'ass', u'tags': [u'1', u'2', u'3']}
+2017-09-17 00:16:51,479 - __main__ - INFO - log started
+2017-09-17 00:17:01,485 - __main__ - INFO - AddCreative:{u'company': u'1', u'link': u'asa.com', u'name': u'ass', u'tags': [u'1', u'2', u'3']}
+2017-09-17 00:18:49,109 - __main__ - INFO - log started
+2017-09-17 00:18:56,866 - __main__ - INFO - AddCreative:{u'company': u'1', u'link': u'asa.com', u'name': u'ass', u'tags': [u'1', u'2', u'3']}
+2017-09-17 00:19:06,886 - __main__ - INFO - AddCreative:{u'company': u'1', u'link': u'asa.com', u'name': u'ass', u'tags': [u'1', u'2', u'3']}
+2017-09-17 00:21:00,739 - __main__ - INFO - log started
+2017-09-17 00:21:01,776 - __main__ - INFO - log started
+2017-09-17 00:21:07,700 - __main__ - INFO - log started
+2017-09-17 00:21:23,534 - __main__ - INFO - AddCreative:{u'company': u'1', u'link': u'121', u'name': u'121', u'tags': [u'121', u'125']}
+2017-09-17 00:28:28,022 - __main__ - INFO - log started
+2017-09-17 00:30:07,365 - __main__ - INFO - log started
+2017-09-17 00:30:52,493 - __main__ - INFO - log started
+2017-09-17 00:31:29,565 - __main__ - INFO - log started
+2017-09-17 00:31:39,516 - __main__ - ERROR - Exception on /dashboard/556131505632883.53 [GET]
+Traceback (most recent call last):
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/stps/code/ARAD/backend/app.py", line 85, in Dashboard
+    return render_template('info.html', data=data)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/flask/templating.py", line 133, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/jinja2/environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/jinja2/environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/jinja2/loaders.py", line 125, in load
+    code = environment.compile(source, name, filename)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/jinja2/environment.py", line 591, in compile
+    self.handle_exception(exc_info, source_hint=source_hint)
+  File "/Users/stps/.envs/arad/lib/python2.7/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/stps/code/ARAD/backend/templates/info.html", line 116, in template
+    <h2>{{tag}}</h2>
+TemplateSyntaxError: Unexpected end of template. Jinja was looking for the following tags: 'endfor' or 'else'. The innermost block that needs to be closed is 'for'.
+2017-09-17 00:32:46,780 - __main__ - INFO - log started
+2017-09-17 00:34:37,919 - __main__ - INFO - AddCreative:{u'company': u'Google', u'link': u'https://docs.google.com/document/d/1W6_r8YoyPEaISrzJ2uVLMfrLCLkXvFSsqKmPahYH_1Y/edit#', u'name': u'The most awesome asset', u'tags': [u'Apple', u'google', u'msft']}
+2017-09-17 00:35:26,875 - __main__ - INFO - log started
+2017-09-17 00:37:30,892 - __main__ - INFO - log started
+2017-09-17 00:39:05,357 - __main__ - INFO - log started
+2017-09-17 00:46:31,707 - __main__ - INFO - log started
+2017-09-17 00:46:49,940 - __main__ - INFO - AddCreative:{u'company': u'Techcrunch', u'title': u'Spanana is Sathipandu', u'link': u'https://docs.google.com/document/d/1W6_r8YoyPEaISrzJ2uVLMfrLCLkXvFSsqKmPahYH_1Y/edit#', u'name': u'Disrupt AD', u'tags': [u'sathi', u'pandu', u'spandu ']}
+2017-09-17 00:50:24,756 - __main__ - INFO - {u'tags': [u'iphone', u'computer', u'notebook']}
+2017-09-17 00:50:24,766 - __main__ - INFO - GetAds:[{u'format': u'IMAGE', u'text': u'Long text', u'title': u'Hello', 'requested_tag': u'iphone', u'link': u'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiF3N2IkavWAhVIylQKHfO_ClYQjRwIBw&url=http%3A%2F%2Flbc9.com%2Fiphonex%2F&psig=AFQjCNG9uG48x9LaSSy0Eu4Tf6uREdxNRA&ust=1505700350417928', 'all_tags': [u'iphone', u'phone', u'apple'], 'id': '630281505623950.7'}]
+2017-09-17 00:51:13,422 - __main__ - INFO - {u'tags': [u'iphone', u'computer', u'pandu']}
+2017-09-17 00:51:13,424 - __main__ - INFO - GetAds:[{u'format': u'IMAGE', u'text': u'Long text', u'title': u'Hello', 'requested_tag': u'iphone', u'link': u'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiF3N2IkavWAhVIylQKHfO_ClYQjRwIBw&url=http%3A%2F%2Flbc9.com%2Fiphonex%2F&psig=AFQjCNG9uG48x9LaSSy0Eu4Tf6uREdxNRA&ust=1505700350417928', 'all_tags': [u'iphone', u'phone', u'apple'], 'id': '630281505623950.7'}, {u'name': u'Disrupt AD', u'company': u'Techcrunch', u'title': u'Spanana is Sathipandu', 'requested_tag': u'pandu', u'link': u'https://docs.google.com/document/d/1W6_r8YoyPEaISrzJ2uVLMfrLCLkXvFSsqKmPahYH_1Y/edit#', 'all_tags': [u'sathi', u'pandu', u'spandu'], 'id': '801311505634409.94'}]
+2017-09-17 01:17:37,159 - __main__ - INFO - log started
+2017-09-17 01:19:00,030 - __main__ - INFO - log started
+2017-09-17 01:21:39,993 - __main__ - INFO - log started
+2017-09-17 01:22:19,701 - __main__ - INFO - log started
+2017-09-17 01:22:58,692 - __main__ - INFO - log started
+2017-09-17 01:29:03,858 - __main__ - INFO - log started
+2017-09-17 01:29:49,140 - __main__ - INFO - log started
+2017-09-17 01:30:48,610 - __main__ - INFO - log started
+2017-09-17 01:32:54,466 - __main__ - INFO - log started
+2017-09-17 01:33:23,164 - __main__ - INFO - log started
+2017-09-17 01:33:44,862 - __main__ - INFO - log started
+2017-09-17 01:34:16,749 - __main__ - INFO - log started

@@ -1,0 +1,8 @@
+curl -X POST \
+  http://yesteapea.com/arad/reaction \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: 5b35400a-4e16-1159-83bb-90758383f267' \
+  -d '    {
+        "id": "773171505624248.35",
+        "is_click" : false
+    }'
