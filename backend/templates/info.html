@@ -1,9 +1,9 @@
 <head>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
-<style type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+    <style type="text/css">
 
 .demo-card-wide.mdl-card {
   margin: 0.6%;
@@ -92,8 +92,8 @@ height: 50px;
 .blue{
   color:#0091EA;
 }
-</style>
 
+    </style>
 
 
 </head>
@@ -102,34 +102,33 @@ height: 50px;
 
 
 <div class="demo-card-wide2 mdl-card2 mdl-shadow--4dp cc">
-<br><br>
-<div class="demo-card-wide mdl-card  a5">
-<h1>{{data["company"]}}</h1>
-	<h2> {{data["name"]}}</h2>
-    <h1 class="blue">
-        <a href={{data["delete"]}}>Delete</a>  &nbsp; &nbsp; &nbsp;
-        <a href={{data["link"]}}>Image</a> &nbsp; &nbsp; &nbsp;
-        <a href={{data["snippet"]}}>Snippet</a>
-    </h1>
-  </div>
-<div class="demo-card-wide mdl-card  a2">
-<h1>Impressions</h1>
-	<h3>{{data["impressions"]}}</h3>
-  </div>
+    <br><br>
+    <div class="demo-card-wide mdl-card  a5">
+        <h1>{{data["company"]}}</h1>
+        <h2> {{data["name"]}}</h2>
+        <h1 class="blue">
+            <a href={{data["delete"]}}>Delete</a> &nbsp; &nbsp; &nbsp;
+            <a href={{data["link"]}}>Image</a> &nbsp; &nbsp; &nbsp;
+            <a href={{data["snippet"]}}>Snippet</a>
+        </h1>
+    </div>
+    <div class="demo-card-wide mdl-card  a2">
+        <h1>Impressions</h1>
+        <h3>{{data["impressions"]}}</h3>
+    </div>
 
-  <div class="demo-card-wide mdl-card  a3">
-<h1>Conversions</h1>
-	<h3>{{data["clicks"]}}</h3>
-  </div>
+    <div class="demo-card-wide mdl-card  a3">
+        <h1>Conversions</h1>
+        <h3>{{data["clicks"]}}</h3>
+    </div>
 
 
-<div class="demo-card-wide mdl-card a1">
-<h1>Keywords</h1>
-{% for tag in data["tags"] %}
-    <h2>{{tag}}</h2>
-{% endfor %}
-</div>
-
+    <div class="demo-card-wide mdl-card a1">
+        <h1>Keywords</h1>
+        {% for tag in data["tags"] %}
+        <h2>{{tag}}</h2>
+        {% endfor %}
+    </div>
 
 
 </div>

@@ -11,8 +11,7 @@ from flask import request
 from flask import url_for
 
 import utils
-from  db import RedisTable
-
+from db import RedisTable
 from initlogging import handler, print_exc
 
 app = Flask(__name__)
@@ -88,15 +87,16 @@ def CreativeInfo():
 def DummyDelete(id):
     return Delete(id)
 
+
 @app.route('/delete/<id>', methods=['GET'])
 def Delete(id):
-    return Response(json.dumps({"success" : db.RemCreative(id)}), mimetype='application/json')
-
+    return Response(json.dumps({"success": db.RemCreative(id)}), mimetype='application/json')
 
 
 @app.route('/arad/dashboard/<id>', methods=['GET'])
 def DummyDashboard(id):
     return Dashboard(id)
+
 
 @app.route('/dashboard/<id>', methods=['GET'])
 def Dashboard(id):
@@ -111,6 +111,7 @@ def Dashboard(id):
 @app.route('/new', methods=['POST', 'GET'])
 def Create():
     return render_template('create.html')
+
 
 @app.route('/list', methods=['POST', 'GET'])
 def List():
