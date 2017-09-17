@@ -603,47 +603,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
-    
-    func createNewBubbleParentNode(_ text : String) -> SCNNode {
-        // Warning: Creating 3D Text is susceptible to crashing. To reduce chances of crashing; reduce number of polygons, letters, smoothness, etc.
-        
-        // TEXT BILLBOARD CONSTRAINT
-        let billboardConstraint = SCNBillboardConstraint()
-        billboardConstraint.freeAxes = SCNBillboardAxis.Y
-        
-        // BUBBLE-TEXT
-        let bubble = SCNText(string: text, extrusionDepth: CGFloat(bubbleDepth))
-        var font = UIFont(name: "Futura", size: 0.15)
-        font = font?.withTraits(traits: .traitBold)
-        bubble.font = font
-        bubble.alignmentMode = kCAAlignmentCenter
-        bubble.firstMaterial?.diffuse.contents = UIColor.orange
-        bubble.firstMaterial?.specular.contents = UIColor.white
-        bubble.firstMaterial?.isDoubleSided = true
-        // bubble.flatness // setting this too low can cause crashes.
-        bubble.chamferRadius = CGFloat(bubbleDepth)
-        
-        // BUBBLE NODE
-        let (minBound, maxBound) = bubble.boundingBox
-        let bubbleNode = SCNNode(geometry: bubble)
-        // Centre Node - to Centre-Bottom point
-        bubbleNode.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
-        // Reduce default image size
-        bubbleNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
-        
-        // CENTRE POINT NODE
-        let sphere = SCNSphere(radius: 0.005)
-        sphere.firstMaterial?.diffuse.contents = UIColor.cyan
-        let sphereNode = SCNNode(geometry: sphere)
-        
-        // BUBBLE PARENT NODE
-        let bubbleNodeParent = SCNNode()
-        bubbleNodeParent.addChildNode(bubbleNode)
-        bubbleNodeParent.addChildNode(sphereNode)
-        bubbleNodeParent.constraints = [billboardConstraint]
-        
-        return bubbleNodeParent
-    }
    
     func captureReaction(adId: String, isClick: Bool) {
         let parameters: Parameters = [
@@ -691,7 +650,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                             let topAdWord = adResult["requested_tag"] as! String
                             let imageLink = adResult["link"] as! String
                             let imageSnippet = adResult["snippet"] as! String
-                            // let node : SCNNode = self.createNewBubbleParentNode(topAdWord)
                             let node:SCNNode = self.createImageNode(imageLink: imageSnippet)
                             node.position = self.tempAdWordLocation[topAdWord]!
                             self.sceneView.scene.rootNode.addChildNode(node)
@@ -711,33 +669,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func createImageNode(imageLink: String) -> SCNNode {
-        // BILLBOARD CONSTRAINT
         let billboardConstraint = SCNBillboardConstraint()
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
-        
-        // BUBBLE-IMAGE
+
         let bubble = SCNNode()
         bubble.geometry = SCNPlane.init(width: 15, height: 15) // better set its size
         bubble.geometry?.firstMaterial?.diffuse.contents = imageLink
         bubble.geometry?.firstMaterial?.isDoubleSided = true
-        
-        // let (minBound, maxBound) = bubble.boundingBox
-        // Centre Node - to Centre-Bottom point
-        // bubble.pivot = SCNMatrix4MakeTranslation( (maxBound.x - minBound.x)/2, minBound.y, bubbleDepth/2)
-        // Reduce default text size
         bubble.scale = SCNVector3Make(0.02, 0.02, 0.02)
-        
-        // CENTRE POINT NODE
-        let sphere = SCNSphere(radius: 0.005)
-        sphere.firstMaterial?.diffuse.contents = UIColor.cyan
-        let sphereNode = SCNNode(geometry: sphere)
-        
-        // BUBBLE PARENT NODE
+
         let bubbleNodeParent = SCNNode()
         bubbleNodeParent.addChildNode(bubble)
-        bubbleNodeParent.addChildNode(sphereNode)
         bubbleNodeParent.constraints = [billboardConstraint]
-        
         return bubbleNodeParent
     }
     
