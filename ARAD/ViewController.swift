@@ -324,7 +324,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let scene = SCNScene()
         sceneView.scene = scene
-        sceneView.autoenablesDefaultLighting = true
+        sceneView.autoenablesDefaultLighting = false
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
         view.addGestureRecognizer(tap)
@@ -506,7 +506,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         DispatchQueue.main.async {
             // Do any desired updates to SceneKit here.
             // If light estimation is enabled, update the intensity of the model's lights and the environment map
-            if let lightEstimate = self.sceneView.session.currentFrame?.lightEstimate {
+             if let lightEstimate = self.sceneView.session.currentFrame?.lightEstimate {
                 
                 // Apple divived the ambientIntensity by 40, I find that, atleast with the materials used
                 // here that it's a big too bright, so I increased to to 50..
@@ -544,6 +544,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @objc func handleTap(gestureRecognizer: UITapGestureRecognizer) {
         // Do hit test to find node.
+        self.sendVisionRequests = true
         if adIdSeen.count > 0 {
             let location: CGPoint = gestureRecognizer.location(in: self.view)
             let hits = self.sceneView.hitTest(location, options: nil)
@@ -556,9 +557,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     }
                 }
             }
+            sendVisionRequests = false
         }
 
-        self.sendVisionRequests = true
         let location = gestureRecognizer.location(in: sceneView)
         
         // tap to place board..
@@ -640,7 +641,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         ]
         Alamofire.request("https://yesteapea.com/arad/getads", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseJSON { response in
-                DispatchQueue.main.async {
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
                     print(response)
                     //to get status code
                     if let status = response.response?.statusCode {
@@ -692,9 +693,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //billboardConstraint.freeAxes = SCNBillboardAxis.Y
 
         let node = SCNNode()
-        node.geometry = SCNPlane.init(width: 15, height: 15) // better set its size
-        node.geometry?.firstMaterial?.diffuse.contents = imageLink
+        node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
+        node.geometry?.firstMaterial?.emission.contents = imageLink
         node.geometry?.firstMaterial?.isDoubleSided = true
+        node.geometry?.firstMaterial?.transparency = 0.85
         node.scale = SCNVector3Make(0.04, 0.04, 0.04)
         node.name = name
         
@@ -712,8 +714,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let node = SCNNode()
         node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
-        node.geometry?.firstMaterial?.diffuse.contents = imageLink
+        node.geometry?.firstMaterial?.emission.contents = imageLink
         node.geometry?.firstMaterial?.isDoubleSided = true
+        node.geometry?.firstMaterial?.transparency = 0.85
         node.scale = SCNVector3Make(0.02, 0.02, 0.02)
         node.name = name
         
