@@ -34,6 +34,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var adTimer = Timer()
     var adTimeLimit:Double = 1.0
     
+    var sendVisionRequests:Bool = false
     
     // Mark - game
     
@@ -455,15 +456,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
     func updateCoreML() {
-        let pixbuff : CVPixelBuffer? = (sceneView.session.currentFrame?.capturedImage)
-        if pixbuff == nil { return }
-        let ciImage = CIImage(cvPixelBuffer: pixbuff!)
-        // Prepare CoreML/Vision Request
-        let imageRequestHandler = VNImageRequestHandler(ciImage: ciImage, options: [:])
-        do {
-            try imageRequestHandler.perform(self.visionRequests)
-        } catch {
-            print(error)
+        if self.sendVisionRequests {
+            let pixbuff : CVPixelBuffer? = (sceneView.session.currentFrame?.capturedImage)
+            if pixbuff == nil { return }
+            let ciImage = CIImage(cvPixelBuffer: pixbuff!)
+            // Prepare CoreML/Vision Request
+            let imageRequestHandler = VNImageRequestHandler(ciImage: ciImage, options: [:])
+            do {
+                try imageRequestHandler.perform(self.visionRequests)
+            } catch {
+                print(error)
+            }
         }
     }
     
@@ -540,6 +543,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
     @objc func handleTap(gestureRecognizer: UITapGestureRecognizer) {
+        self.sendVisionRequests = true
         let location = gestureRecognizer.location(in: sceneView)
         
         // tap to place board..
