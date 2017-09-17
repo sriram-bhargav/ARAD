@@ -144,7 +144,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                         self.game = newGameState
                     }
                 }
-                
+
                 // animate action
                 switch action {
                 case .put(let at):
@@ -543,13 +543,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
     @objc func handleTap(gestureRecognizer: UITapGestureRecognizer) {
+        // Do hit test to find node.
+        if adIdSeen.count > 0 {
+            let location: CGPoint = gestureRecognizer.location(in: self.view)
+            let hits = self.sceneView.hitTest(location, options: nil)
+            if let tappedNode = hits.first?.node {
+                if tappedNode.name == "snippet" {
+                    tappedNode.isHidden = true
+                    if let mainAd = self.sceneView.scene.rootNode.childNode(withName: "main", recursively: true) {
+                        self.captureReaction(adId: mainAd.parent!.name!, isClick: true)
+                        mainAd.parent?.isHidden = false
+                    }
+                }
+            }
+        }
+
         self.sendVisionRequests = true
         let location = gestureRecognizer.location(in: sceneView)
         
         // tap to place board..
         guard let _ = currentPlane else {
             guard let newPlaneData = anyPlaneFrom(location: location) else { return }
-            
+
             let floor = SCNFloor()
             floor.reflectivity = 0
             let material = SCNMaterial()
@@ -583,8 +598,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
         // runAd()
     }
-    
-    
     
     func runAd() {
         latestPrediction = latestPrediction.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
@@ -650,9 +663,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                             let topAdWord = adResult["requested_tag"] as! String
                             let imageLink = adResult["link"] as! String
                             let imageSnippet = adResult["snippet"] as! String
-                            let node:SCNNode = self.createImageNode(imageLink: imageSnippet)
-                            node.position = self.tempAdWordLocation[topAdWord]!
-                            self.sceneView.scene.rootNode.addChildNode(node)
+                            let node1:SCNNode = self.createImageNode(imageLink: imageLink, name: "main", id: adId)
+                            node1.position = self.tempAdWordLocation[topAdWord]!
+                            node1.isHidden = true
+                            let node2:SCNNode = self.createImageNode(imageLink: imageSnippet, name: "snippet", id: adId + "_snippet")
+                            node2.position = node1.position
+                            self.sceneView.scene.rootNode.addChildNode(node1)
+                            self.sceneView.scene.rootNode.addChildNode(node2)
                             self.adWordsUsed[topAdWord] = true
                             // Save Ad id for click tracking.
                             self.adIds.updateValue(adId, forKey: topAdWord)
@@ -668,20 +685,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func createImageNode(imageLink: String) -> SCNNode {
+    func createImageNode(imageLink: String, name: String, id: String) -> SCNNode {
         let billboardConstraint = SCNBillboardConstraint()
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
 
-        let bubble = SCNNode()
-        bubble.geometry = SCNPlane.init(width: 15, height: 15) // better set its size
-        bubble.geometry?.firstMaterial?.diffuse.contents = imageLink
-        bubble.geometry?.firstMaterial?.isDoubleSided = true
-        bubble.scale = SCNVector3Make(0.02, 0.02, 0.02)
-
-        let bubbleNodeParent = SCNNode()
-        bubbleNodeParent.addChildNode(bubble)
-        bubbleNodeParent.constraints = [billboardConstraint]
-        return bubbleNodeParent
+        let node = SCNNode()
+        node.geometry = SCNPlane.init(width: 15, height: 15) // better set its size
+        node.geometry?.firstMaterial?.diffuse.contents = imageLink
+        node.geometry?.firstMaterial?.isDoubleSided = true
+        node.scale = SCNVector3Make(0.02, 0.02, 0.02)
+        node.name = name
+        
+        let nodeParent = SCNNode()
+        nodeParent.addChildNode(node)
+        nodeParent.constraints = [billboardConstraint]
+        nodeParent.name = id
+        // nodeParent.name = name
+        return nodeParent
     }
     
     func classificationCompleteHandler(request: VNRequest, error: Error?) {
