@@ -640,48 +640,50 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         ]
         Alamofire.request("https://yesteapea.com/arad/getads", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseJSON { response in
-                print(response)
-                //to get status code
-                if let status = response.response?.statusCode {
-                    switch(status) {
-                    case 200:
-                        print("success")
-                    default:
-                        print("not success")
-                    }
-                }
-                if let result = response.result.value {
-                    let results = result as! NSArray
-                    if results.count > 0 {
-                        let firstResult = results[0]
-                        let adResult = firstResult as! [String: AnyObject]
-                        print(adResult["link"] as! String)
-                        
-                        let adId = adResult["id"] as! String
-                        if self.adIdSeen[adId] == nil {
-                            // Create 3D Text
-                            let topAdWord = adResult["requested_tag"] as! String
-                            let imageLink = adResult["link"] as! String
-                            let imageSnippet = adResult["snippet"] as! String
-                            let node1:SCNNode = self.createImageNode(imageLink: imageLink, name: "main", id: adId)
-                            node1.position = self.tempAdWordLocation[topAdWord]!
-                            node1.isHidden = true
-                            let node2:SCNNode = self.createImageNode(imageLink: imageSnippet, name: "snippet", id: adId + "_snippet")
-                            node2.position = node1.position
-                            self.sceneView.scene.rootNode.addChildNode(node1)
-                            self.sceneView.scene.rootNode.addChildNode(node2)
-                            self.adWordsUsed[topAdWord] = true
-                            // Save Ad id for click tracking.
-                            self.adIds.updateValue(adId, forKey: topAdWord)
-                            self.adIdSeen[adId] = true
-                            // Send ARAD server to update impression.
-                            self.captureReaction(adId: adId, isClick: false)
-                        } else {
-                            print("ad already shown to user, ignore this one!")
+                DispatchQueue.main.async {
+                    print(response)
+                    //to get status code
+                    if let status = response.response?.statusCode {
+                        switch(status) {
+                        case 200:
+                            print("success")
+                        default:
+                            print("not success")
                         }
                     }
+                    if let result = response.result.value {
+                        let results = result as! NSArray
+                        if results.count > 0 {
+                            let firstResult = results[0]
+                            let adResult = firstResult as! [String: AnyObject]
+                            print(adResult["link"] as! String)
+                            
+                            let adId = adResult["id"] as! String
+                            if self.adIdSeen[adId] == nil {
+                                // Create 3D Text
+                                let topAdWord = adResult["requested_tag"] as! String
+                                let imageLink = adResult["link"] as! String
+                                let imageSnippet = adResult["snippet"] as! String
+                                let node1:SCNNode = self.createImageNode(imageLink: imageLink, name: "main", id: adId)
+                                node1.position = self.tempAdWordLocation[topAdWord]!
+                                node1.isHidden = true
+                                let node2:SCNNode = self.createImageNode(imageLink: imageSnippet, name: "snippet", id: adId + "_snippet")
+                                node2.position = node1.position
+                                self.sceneView.scene.rootNode.addChildNode(node1)
+                                self.sceneView.scene.rootNode.addChildNode(node2)
+                                self.adWordsUsed[topAdWord] = true
+                                // Save Ad id for click tracking.
+                                self.adIds.updateValue(adId, forKey: topAdWord)
+                                self.adIdSeen[adId] = true
+                                // Send ARAD server to update impression.
+                                self.captureReaction(adId: adId, isClick: false)
+                            } else {
+                                print("ad already shown to user, ignore this one!")
+                            }
+                        }
+                    }
+                    self.clearTempAdWords()
                 }
-                self.clearTempAdWords()
         }
     }
     
