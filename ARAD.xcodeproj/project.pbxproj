@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		035BE0B61F6E10DF00E4659B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 035BE0B51F6E10DF00E4659B /* Podfile */; };
+		047967EC409162F2CB8CAD92 /* Pods_ARAD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B3E10BBD0640DB1214DACC /* Pods_ARAD.framework */; };
 		218312911F6DC27600CC4D3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218312901F6DC27600CC4D3E /* AppDelegate.swift */; };
 		218312931F6DC27600CC4D3E /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 218312921F6DC27600CC4D3E /* art.scnassets */; };
 		218312951F6DC27600CC4D3E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218312941F6DC27600CC4D3E /* ViewController.swift */; };
@@ -37,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		035BE0B51F6E10DF00E4659B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		2183128D1F6DC27600CC4D3E /* ARAD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARAD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		218312901F6DC27600CC4D3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		218312921F6DC27600CC4D3E /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -53,6 +56,9 @@
 		218312B41F6DC27600CC4D3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		218312C11F6DC2EB00CC4D3E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		219391271F6DE9E000A3E872 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
+		48B3E10BBD0640DB1214DACC /* Pods_ARAD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARAD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CFDE609163893251D54FC46 /* Pods-ARAD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARAD.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARAD/Pods-ARAD.debug.xcconfig"; sourceTree = "<group>"; };
+		DFFC2DEFB9FA3F990BFF8A5C /* Pods-ARAD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARAD.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARAD/Pods-ARAD.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				218312C21F6DC2EB00CC4D3E /* MapKit.framework in Frameworks */,
+				047967EC409162F2CB8CAD92 /* Pods_ARAD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,11 +91,13 @@
 		218312841F6DC27500CC4D3E = {
 			isa = PBXGroup;
 			children = (
+				035BE0B51F6E10DF00E4659B /* Podfile */,
 				2183128F1F6DC27600CC4D3E /* ARAD */,
 				218312A61F6DC27600CC4D3E /* ARADTests */,
 				218312B11F6DC27600CC4D3E /* ARADUITests */,
 				2183128E1F6DC27600CC4D3E /* Products */,
 				218312C01F6DC2EB00CC4D3E /* Frameworks */,
+				B655E420EC0A094A3C1E44C9 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,8 +148,18 @@
 			isa = PBXGroup;
 			children = (
 				218312C11F6DC2EB00CC4D3E /* MapKit.framework */,
+				48B3E10BBD0640DB1214DACC /* Pods_ARAD.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B655E420EC0A094A3C1E44C9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5CFDE609163893251D54FC46 /* Pods-ARAD.debug.xcconfig */,
+				DFFC2DEFB9FA3F990BFF8A5C /* Pods-ARAD.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,9 +169,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 218312B71F6DC27600CC4D3E /* Build configuration list for PBXNativeTarget "ARAD" */;
 			buildPhases = (
+				26802C6EC00D6F2B03BB93CB /* [CP] Check Pods Manifest.lock */,
 				218312891F6DC27600CC4D3E /* Sources */,
 				2183128A1F6DC27600CC4D3E /* Frameworks */,
 				2183128B1F6DC27600CC4D3E /* Resources */,
+				D93EFBFFD737C0890590A15F /* [CP] Embed Pods Frameworks */,
+				07912D4D9DE562951EB6CF12 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -255,6 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				035BE0B61F6E10DF00E4659B /* Podfile in Resources */,
 				218312931F6DC27600CC4D3E /* art.scnassets in Resources */,
 				2183129D1F6DC27600CC4D3E /* LaunchScreen.storyboard in Resources */,
 				2183129A1F6DC27600CC4D3E /* Assets.xcassets in Resources */,
@@ -277,6 +300,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07912D4D9DE562951EB6CF12 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARAD/Pods-ARAD-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		26802C6EC00D6F2B03BB93CB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ARAD-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D93EFBFFD737C0890590A15F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ARAD/Pods-ARAD-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARAD/Pods-ARAD-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		218312891F6DC27600CC4D3E /* Sources */ = {
@@ -449,6 +526,7 @@
 		};
 		218312B81F6DC27600CC4D3E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CFDE609163893251D54FC46 /* Pods-ARAD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -464,6 +542,7 @@
 		};
 		218312B91F6DC27600CC4D3E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DFFC2DEFB9FA3F990BFF8A5C /* Pods-ARAD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

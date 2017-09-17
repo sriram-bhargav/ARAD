@@ -1,6 +1,7 @@
 import UIKit
 import SceneKit
 import ARKit
+import Alamofire
 
 import Vision
 
@@ -164,6 +165,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         bubbleNodeParent.constraints = [billboardConstraint]
         
         return bubbleNodeParent
+    }
+    
+    func makeRequest() {
+        let parameters: Parameters = [
+            "tags": ["laptop"]
+        ]
+        
+        Alamofire.request("https://yesteapea.com/arad/getads", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            debugPrint(response)
+        }
     }
     
     func classificationCompleteHandler(request: VNRequest, error: Error?) {
