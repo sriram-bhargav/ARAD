@@ -641,7 +641,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         ]
         Alamofire.request("https://yesteapea.com/arad/getads", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseJSON { response in
-                DispatchQueue.main.async {
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
                     print(response)
                     //to get status code
                     if let status = response.response?.statusCode {
@@ -693,8 +693,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //billboardConstraint.freeAxes = SCNBillboardAxis.Y
 
         let node = SCNNode()
-        node.geometry = SCNPlane.init(width: 15, height: 15) // better set its size
-        node.geometry?.firstMaterial?.diffuse.contents = imageLink
+        node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
+        node.geometry?.firstMaterial?.emission.contents = imageLink
         node.geometry?.firstMaterial?.isDoubleSided = true
         node.scale = SCNVector3Make(0.04, 0.04, 0.04)
         node.name = name
@@ -713,7 +713,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let node = SCNNode()
         node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
-        node.geometry?.firstMaterial?.diffuse.contents = imageLink
+        node.geometry?.firstMaterial?.emission.contents = imageLink
         node.geometry?.firstMaterial?.isDoubleSided = true
         node.scale = SCNVector3Make(0.02, 0.02, 0.02)
         node.name = name
