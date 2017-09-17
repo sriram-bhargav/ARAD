@@ -24,30 +24,82 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
                                 <color key="backgroundColor" red="0.20235941715152508" green="0.20726452517284072" blue="0.2219798492367876" alpha="0.49392055457746481" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="ODl-TF-SpU"/>
+                                    <constraint firstAttribute="height" constant="48" id="kYh-dg-hRy"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHY-P8-wXr" userLabel="Plane Search Overlay">
+                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Move around to allow the app the find a plane..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htE-4P-kYZ" userLabel="Plane Search Label">
+                                        <rect key="frame" x="16" y="43" width="208" height="43"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="htE-4P-kYZ" firstAttribute="leading" secondItem="pHY-P8-wXr" secondAttribute="leading" constant="16" id="K8v-HV-44Z"/>
+                                    <constraint firstItem="htE-4P-kYZ" firstAttribute="top" secondItem="pHY-P8-wXr" secondAttribute="top" constant="43" id="KtT-pv-uFe"/>
+                                    <constraint firstItem="htE-4P-kYZ" firstAttribute="centerX" secondItem="pHY-P8-wXr" secondAttribute="centerX" id="TwC-pU-a35"/>
+                                    <constraint firstItem="htE-4P-kYZ" firstAttribute="centerY" secondItem="pHY-P8-wXr" secondAttribute="centerY" id="fbF-hN-HAW"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DNu-wk-3X3">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYQ-Or-iWl">
+                                        <rect key="frame" x="16" y="7" width="68" height="30"/>
+                                        <state key="normal" title="Start over"/>
+                                        <connections>
+                                            <action selector="didTapStartOver:" destination="BV1-FR-VrT" eventType="touchUpInside" id="G0j-Kb-Enq"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x put" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qom-W2-gFB" userLabel="Game State Label">
+                                        <rect key="frame" x="320" y="12" width="39" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="mYQ-Or-iWl" firstAttribute="top" secondItem="DNu-wk-3X3" secondAttribute="top" constant="7" id="13w-gT-9dd"/>
+                                    <constraint firstItem="mYQ-Or-iWl" firstAttribute="centerY" secondItem="Qom-W2-gFB" secondAttribute="centerY" id="DCz-TX-ohz"/>
+                                    <constraint firstItem="mYQ-Or-iWl" firstAttribute="leading" secondItem="DNu-wk-3X3" secondAttribute="leading" constant="16" id="DZR-Fh-ukK"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qom-W2-gFB" secondAttribute="trailing" constant="16" id="OaN-ni-GWk"/>
+                                    <constraint firstItem="mYQ-Or-iWl" firstAttribute="centerY" secondItem="DNu-wk-3X3" secondAttribute="centerY" id="V80-hD-lTF"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="v6A-s6-QdI" firstAttribute="top" secondItem="5yy-wv-vfc" secondAttribute="top" id="4Ku-4A-07x"/>
-                            <constraint firstItem="yQX-av-5NU" firstAttribute="trailing" secondItem="Fjr-cy-dpz" secondAttribute="trailing" id="84O-zo-w8C"/>
-                            <constraint firstItem="v6A-s6-QdI" firstAttribute="trailing" secondItem="Fjr-cy-dpz" secondAttribute="trailing" id="X8t-PK-bgJ"/>
-                            <constraint firstItem="v6A-s6-QdI" firstAttribute="leading" secondItem="Fjr-cy-dpz" secondAttribute="leading" id="bhD-7f-92g"/>
-                            <constraint firstItem="v6A-s6-QdI" firstAttribute="trailing" secondItem="Fjr-cy-dpz" secondAttribute="trailing" id="ccC-dY-cni"/>
-                            <constraint firstItem="v6A-s6-QdI" firstAttribute="leading" secondItem="Fjr-cy-dpz" secondAttribute="leading" id="hh1-kw-jdg"/>
-                            <constraint firstItem="yQX-av-5NU" firstAttribute="top" secondItem="5yy-wv-vfc" secondAttribute="top" id="jRI-QG-hx3"/>
-                            <constraint firstItem="yQX-av-5NU" firstAttribute="bottom" secondItem="Fjr-cy-dpz" secondAttribute="bottom" id="o1Z-ZG-jn0"/>
-                            <constraint firstItem="yQX-av-5NU" firstAttribute="leading" secondItem="Fjr-cy-dpz" secondAttribute="leading" id="yNx-Rw-wVf"/>
+                            <constraint firstItem="v6A-s6-QdI" firstAttribute="trailing" secondItem="DNu-wk-3X3" secondAttribute="trailing" id="2DV-0B-VhB"/>
+                            <constraint firstAttribute="trailing" secondItem="yQX-av-5NU" secondAttribute="trailing" id="3zZ-ma-jwy"/>
+                            <constraint firstItem="yQX-av-5NU" firstAttribute="trailing" secondItem="v6A-s6-QdI" secondAttribute="trailing" id="9cB-bG-7t5"/>
+                            <constraint firstItem="v6A-s6-QdI" firstAttribute="leading" secondItem="5yy-wv-vfc" secondAttribute="leading" id="Fjm-d2-vQQ"/>
+                            <constraint firstItem="v6A-s6-QdI" firstAttribute="leading" secondItem="yQX-av-5NU" secondAttribute="leading" id="J8d-Ki-BSu"/>
+                            <constraint firstItem="v6A-s6-QdI" firstAttribute="centerX" secondItem="pHY-P8-wXr" secondAttribute="centerX" id="Pxp-mP-eC5"/>
+                            <constraint firstItem="v6A-s6-QdI" firstAttribute="leading" secondItem="DNu-wk-3X3" secondAttribute="leading" id="Uzg-9Q-wpU"/>
+                            <constraint firstItem="DNu-wk-3X3" firstAttribute="bottom" secondItem="Fjr-cy-dpz" secondAttribute="bottom" id="ZYx-Kt-4SY"/>
+                            <constraint firstItem="yQX-av-5NU" firstAttribute="bottom" secondItem="Fjr-cy-dpz" secondAttribute="bottom" id="bJ1-Jd-zPP"/>
+                            <constraint firstItem="yQX-av-5NU" firstAttribute="top" secondItem="v6A-s6-QdI" secondAttribute="top" id="iAR-2b-xoM"/>
+                            <constraint firstItem="pHY-P8-wXr" firstAttribute="top" secondItem="5yy-wv-vfc" secondAttribute="top" constant="269" id="r64-y4-Nan"/>
+                            <constraint firstItem="pHY-P8-wXr" firstAttribute="leading" secondItem="Fjr-cy-dpz" secondAttribute="leading" constant="67" id="rSr-pZ-tMJ"/>
+                            <constraint firstItem="yQX-av-5NU" firstAttribute="centerY" secondItem="pHY-P8-wXr" secondAttribute="centerY" id="ygL-rO-sbp"/>
+                            <constraint firstItem="yQX-av-5NU" firstAttribute="top" secondItem="5yy-wv-vfc" secondAttribute="top" id="ymq-za-4YE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Fjr-cy-dpz"/>
                     </view>
                     <connections>
                         <outlet property="debugTextView" destination="v6A-s6-QdI" id="PSQ-Tm-Ifz"/>
-                        <outlet property="sceneView" destination="yQX-av-5NU" id="IrW-7E-ASN"/>
+                        <outlet property="gameStateLabel" destination="Qom-W2-gFB" id="25k-Tm-Yzk"/>
+                        <outlet property="planeSearchLabel" destination="htE-4P-kYZ" id="lhk-d4-Gq5"/>
+                        <outlet property="planeSearchOverlay" destination="pHY-P8-wXr" id="PgB-vK-tDI"/>
+                        <outlet property="sceneView" destination="yQX-av-5NU" id="zNY-7l-IvA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
