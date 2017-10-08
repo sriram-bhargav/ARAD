@@ -30,7 +30,7 @@ Objects that we have ads for: iphone, a laptop, a coke or water bottle
 
 # Team
 
-- Jaydev Ajit Kumary
+- Jaydev Ajit Kumar
 - Sriram Bhargav
 - Sai Teja Pratap
 - Spandana Govindgari
