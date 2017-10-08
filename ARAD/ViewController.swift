@@ -623,7 +623,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             "id": adId,
             "is_click": isClick,
         ]
-        Alamofire.request("https://yesteapea.com/arad/reaction", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        Alamofire.request("https://api.arad.space/reaction", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseJSON { response in }
     }
     
@@ -639,7 +639,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let parameters: Parameters = [
             "tags": keywords
         ]
-        Alamofire.request("https://yesteapea.com/arad/getads", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        Alamofire.request("https://api.arad.space/getads", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseJSON { response in
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
                     print(response)
