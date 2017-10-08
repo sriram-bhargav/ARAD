@@ -758,6 +758,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
     func initPlayer() {
+        playerItem?.addObserver(
+            self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.old, .new], context: &playerItemContext)
         player = AVPlayer.init(playerItem: playerItem)
         player?.volume = 1.0
         player?.isMuted = false
@@ -796,10 +798,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             node.geometry?.firstMaterial?.transparency = 0.85
             node.scale = SCNVector3Make(0.04, 0.04, 0.04)
         } else {
-            let url: NSURL = NSURL(string: mediaLink)!
-            preparePlayerItem(url: url)
+            let url:URL = URL.init(string: mediaLink)!
+            // preparePlayerItem(url: url)
+            playerItem = AVPlayerItem.init(url: url)
             initPlayer()
             node.geometry?.materials = [getVideoMaterial()]
+            node.scale = SCNVector3Make(0.04, 0.04, 0.04)
         }
         node.name = name
 
