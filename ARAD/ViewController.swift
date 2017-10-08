@@ -2,6 +2,9 @@ import UIKit
 import SceneKit
 import ARKit
 import Alamofire
+import AVFoundation
+import SpriteKit
+import MobileCoreServices
 
 import Vision
 
@@ -36,7 +39,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var sendVisionRequests:Bool = false
     
-    // Mark - game
+    // Video variables
+    var videoNode:SKVideoNode?
+    var player:AVPlayer?
+    var playerItem: AVPlayerItem?
+    var playerItemContext: Int = 0
     
     // GAME
     
@@ -632,7 +639,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             self.getAds(keywords: keywords)
         }
     }
-
+    
     func getAds(keywords: [String]) {
         //print("keywords")
         //print(keywords)
@@ -663,12 +670,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                             if self.adIdSeen[adId] == nil {
                                 // Create 3D Text
                                 let topAdWord = adResult["requested_tag"] as! String
-                                let imageLink = adResult["link"] as! String
+                                let mediaLink = adResult["link"] as! String
                                 let imageSnippet = adResult["snippet"] as! String
-                                let node1:SCNNode = self.createImageNode1(imageLink: imageLink, name: "main", id: adId)
+                                let node1:SCNNode = self.createMediaNode(mediaLink: mediaLink, name: "main", id: adId)
                                 node1.position = self.tempAdWordLocation[topAdWord]!
                                 node1.isHidden = true
-                                let node2:SCNNode = self.createImageNode2(imageLink: imageSnippet, name: "snippet", id: adId + "_snippet")
+                                let node2:SCNNode = self.createImageNode(imageLink: imageSnippet, name: "snippet", id: adId + "_snippet")
                                 node2.position = node1.position
                                 self.sceneView.scene.rootNode.addChildNode(node1)
                                 self.sceneView.scene.rootNode.addChildNode(node2)
@@ -688,33 +695,132 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func createImageNode1(imageLink: String, name: String, id: String) -> SCNNode {
-        //let billboardConstraint = SCNBillboardConstraint()
-        //billboardConstraint.freeAxes = SCNBillboardAxis.Y
+    func mediaType(link: String) -> String {
+        let link_extension = NSURL(fileURLWithPath: link).pathExtension
+        let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, link_extension! as CFString, nil)
+        if !UTTypeConformsTo((uti?.takeRetainedValue())!, kUTTypeImage) {
+            return "video"
+        }
+        return "image"
+    }
+    
+    func preparePlayerItem(url: NSURL) {
+        // Create asset to be played
+        let asset = AVURLAsset(url: url as URL, options: nil)
+        //print(AVURLAsset.audiovisualTypes())
+        
+        let assetKeys = [
+            "playable",
+            "hasProtectedContent"
+        ]
+        // Create a new AVPlayerItem with the asset and an
+        // array of asset keys to be automatically loaded
+        playerItem = AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: assetKeys)
+        // Register as an observer of the player item's status property
+        playerItem?.addObserver(
+            self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.old, .new], context: &playerItemContext)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?,
+                               of object: Any?,
+                               change: [NSKeyValueChangeKey : Any]?,
+                               context: UnsafeMutableRawPointer?) {
+        // Only handle observations for the playerItemContext
+        guard context == &playerItemContext else {
+            super.observeValue(forKeyPath: keyPath,
+                               of: object,
+                               change: change,
+                               context: context)
+            return
+        }
+        if keyPath == #keyPath(AVPlayerItem.status) {
+            let status: AVPlayerItemStatus
+            
+            // Get the status change from the change dictionary
+            if let statusNumber = change?[.newKey] as? NSNumber {
+                status = AVPlayerItemStatus(rawValue: statusNumber.intValue)!
+            } else {
+                status = .unknown
+            }
+            // Switch over the status
+            switch status {
+            case .readyToPlay:
+                // Player item is ready to play.
+                print("Ready to play")
+            case .failed:
+                // Player item failed. See error.
+                print("Player item failed: ", self.playerItem?.error.debugDescription ?? "")
+            case .unknown:
+                // Player item is not yet ready.
+                print("Player item not ready")
+            }
+        }
+    }
 
+    func initPlayer() {
+        playerItem?.addObserver(
+            self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.old, .new], context: &playerItemContext)
+        player = AVPlayer.init(playerItem: playerItem)
+        player?.volume = 1.0
+        player?.isMuted = false
+        player?.automaticallyWaitsToMinimizeStalling = false
+        player?.play()
+    }
+
+    func getSpriteScene(newPlayer: AVPlayer) -> SKScene {
+        videoNode = SKVideoNode.init(avPlayer: newPlayer)
+        let size = CGSize(width: 1920, height: 1080)
+        videoNode?.size = size
+        videoNode?.position = CGPoint(x: size.width/2.0, y: size.height/2.0)
+        let spriteScene = SKScene(size: size)
+        spriteScene.addChild(videoNode!)
+        return spriteScene
+    }
+    
+    func getVideoMaterial() -> SCNMaterial {
+        let videomaterial = SCNMaterial()
+        videomaterial.isDoubleSided = false
+        videomaterial.diffuse.contents = getSpriteScene(newPlayer: player!)
+        videomaterial.diffuse.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, -1, 1), 0, 1, 0)
+        return videomaterial
+    }
+    
+    func createMediaNode(mediaLink: String, name: String, id: String) -> SCNNode {
+        let billboardConstraint = SCNBillboardConstraint()
+        billboardConstraint.freeAxes = SCNBillboardAxis.Y
+        let contentType = mediaType(link: mediaLink)
+        print(contentType)
         let node = SCNNode()
         node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
-        node.geometry?.firstMaterial?.emission.contents = imageLink
-        node.geometry?.firstMaterial?.isDoubleSided = true
-        node.geometry?.firstMaterial?.transparency = 0.85
-        node.scale = SCNVector3Make(0.04, 0.04, 0.04)
+        if contentType == "image" {
+            node.geometry?.firstMaterial?.diffuse.contents = mediaLink
+            node.geometry?.firstMaterial?.isDoubleSided = true
+            node.geometry?.firstMaterial?.transparency = 0.85
+            node.scale = SCNVector3Make(0.04, 0.04, 0.04)
+        } else {
+            let url:URL = URL.init(string: mediaLink)!
+            // preparePlayerItem(url: url)
+            playerItem = AVPlayerItem.init(url: url)
+            initPlayer()
+            node.geometry?.materials = [getVideoMaterial()]
+            node.scale = SCNVector3Make(0.04, 0.04, 0.04)
+        }
         node.name = name
-        
+
         let nodeParent = SCNNode()
         nodeParent.addChildNode(node)
-        //nodeParent.constraints = [billboardConstraint]
+        nodeParent.constraints = [billboardConstraint]
         nodeParent.name = id
-        // nodeParent.name = name
         return nodeParent
     }
     
-    func createImageNode2(imageLink: String, name: String, id: String) -> SCNNode {
-        //let billboardConstraint = SCNBillboardConstraint()
-        //billboardConstraint.freeAxes = SCNBillboardAxis.Y
+    func createImageNode(imageLink: String, name: String, id: String) -> SCNNode {
+        let billboardConstraint = SCNBillboardConstraint()
+        billboardConstraint.freeAxes = SCNBillboardAxis.Y
         
         let node = SCNNode()
         node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
-        node.geometry?.firstMaterial?.emission.contents = imageLink
+        node.geometry?.firstMaterial?.diffuse.contents = imageLink
         node.geometry?.firstMaterial?.isDoubleSided = true
         node.geometry?.firstMaterial?.transparency = 0.85
         node.scale = SCNVector3Make(0.02, 0.02, 0.02)
@@ -722,9 +828,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let nodeParent = SCNNode()
         nodeParent.addChildNode(node)
-        //nodeParent.constraints = [billboardConstraint]
+        nodeParent.constraints = [billboardConstraint]
         nodeParent.name = id
-        // nodeParent.name = name
         return nodeParent
     }
     
