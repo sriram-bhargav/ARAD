@@ -74,13 +74,14 @@ def EditCreative(id):
 
 @app.route('/reaction', methods=['POST', 'GET'])
 def LogReaction():
+    request_id = utils.NewId()
     data = json.loads(request.data)
     LOG.info("SeenCreative:" + str(data))
     if not data.has_key("id") or not data.has_key("is_click"):
-        ret = {'message': "send id and is_click", "success": False}
+        ret = {'message': "send id and is_click", 'request_id': request_id, "success": False}
     else:
         db.LogReaction(data["id"], data["is_click"])
-        ret = {"success": True}
+        ret = {"success": True, "request_id" : request_id}
     return Response(json.dumps(ret), mimetype='application/json')
 
 

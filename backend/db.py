@@ -33,6 +33,7 @@ class RedisTable():
         return {"id": id, "request_id": request_id, "success": True}
 
     def TagToCreative(self, tag):
+        request_id = utils.NewId()
         creatives = self.tag_to_creative.smembers(tag)
         if creatives is None or len(creatives) == 0:
             return None
@@ -43,6 +44,7 @@ class RedisTable():
         del creative["tags"]
         creative["requested_tag"] = tag
         creative["id"] = id
+        creative["request_id"] = request_id
         return creative
 
     def IdToCreative(self, id):
