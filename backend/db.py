@@ -19,16 +19,18 @@ class RedisTable():
 
     def AddCreative(self, data):
         id = utils.NewId()
+        request_id = utils.NewId()
         self.creatives.set(id, json.dumps(data))
         for tag in data["tags"]:
             self.tag_to_creative.sadd(tag, id)
-        return {"id": id, "success": True}
+        return {"id": id, "request_id": request_id, "success": True}
 
     def EditCreative(self, id, data):
+        request_id = utils.NewId()
         self.creatives.set(id, json.dumps(data))
         for tag in data["tags"]:
             self.tag_to_creative.sadd(tag, id)
-        return {"id": id, "success": True}
+        return {"id": id, "request_id": request_id, "success": True}
 
     def TagToCreative(self, tag):
         creatives = self.tag_to_creative.smembers(tag)

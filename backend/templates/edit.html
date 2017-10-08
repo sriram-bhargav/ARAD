@@ -437,6 +437,10 @@ h1{
     <form>
         <h1>Edit your Ad</h1>
 
+        <input id="company" type="hidden" value={{data["company"]}} />
+        <input id="name" type="hidden" value={{data["name"]}} />
+        <input id="title" type="hidden" value={{data["title"]}} />
+
         <div class="form-group">
             <input id="keywords" type="text" required="required" value={{','.join(data["tags"])}} />
             <label class="control-label" for="input">Keywords</label><i class="bar"></i>
@@ -461,7 +465,10 @@ h1{
 
 <script>
 $( "#submit" ).click(function() {
+  var company = $("#company").val();
   var keywords = $("#keywords").val().split(",");
+  var name = $("#name").val();
+  var title = $("#title").val();
   var url = $("#url").val();
   var snippet_url = $("#snippet_url").val();
 
@@ -471,9 +478,12 @@ $( "#submit" ).click(function() {
   request_url  = pres_url.replace("/arad/edit", "/edit-creative");
 
   data = {
+    "company" : company,
     "tags" : keywords,
+    "name" : name,
     "link" : url,
     "snippet" : snippet_url,
+    "title" : title
   }
   $.ajax({
     type: "POST",
