@@ -59,6 +59,19 @@ def AddCreative():
     return Response(json.dumps(ret), mimetype='application/json')
 
 
+@app.route('/edit-creative/<id>', methods=['POST', 'GET'])
+def EditCreative(id):
+    data = json.loads(request.data)
+    LOG.info("EditCreative:" + str(data))
+    valid = utils.CheckCreativeRequest(data)
+    if not valid:
+        ret = {'message': "Invalid Request", "success": False}
+        return Response(json.dumps(ret), mimetype='application/json')
+    data["tags"] = [tag.strip() for tag in data["tags"]]
+    ret = db.EditCreative(id, data)
+    return Response(json.dumps(ret), mimetype='application/json')
+
+
 @app.route('/reaction', methods=['POST', 'GET'])
 def LogReaction():
     data = json.loads(request.data)
@@ -87,6 +100,10 @@ def CreativeInfo():
 def DummyDelete(id):
     return Delete(id)
 
+@app.route('/arad/edit/<id>', methods=['GET', 'POST'])
+def DummyEdit(id):
+    return Edit(id)
+
 
 @app.route('/delete/<id>', methods=['GET'])
 def Delete(id):
@@ -104,6 +121,7 @@ def Dashboard(id):
     data = db.CreativeInfo(id)
     LOG.info(data)
     data["delete"] = url_for('DummyDelete', id=id)
+    data["edit"] = url_for('DummyEdit', id=id)
     LOG.info(data)
     return render_template('info.html', data=data)
 
@@ -111,6 +129,13 @@ def Dashboard(id):
 @app.route('/new', methods=['POST', 'GET'])
 def Create():
     return render_template('create.html')
+
+@app.route('/edit/<id>', methods=['POST', 'GET'])
+def Edit(id):
+    LOG.info(id)
+    data = db.CreativeInfo(id)
+    LOG.info(data)
+    return render_template('edit.html', data=data)
 
 
 @app.route('/list', methods=['POST', 'GET'])

@@ -24,6 +24,12 @@ class RedisTable():
             self.tag_to_creative.sadd(tag, id)
         return {"id": id, "success": True}
 
+    def EditCreative(self, id, data):
+        self.creatives.set(id, json.dumps(data))
+        for tag in data["tags"]:
+            self.tag_to_creative.sadd(tag, id)
+        return {"id": id, "success": True}
+
     def TagToCreative(self, tag):
         creatives = self.tag_to_creative.smembers(tag)
         if creatives is None or len(creatives) == 0:
