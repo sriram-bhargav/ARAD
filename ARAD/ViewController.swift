@@ -5,6 +5,7 @@ import Alamofire
 import AVFoundation
 import SpriteKit
 import MobileCoreServices
+import AdSupport
 
 import Vision
 
@@ -44,6 +45,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var player:AVPlayer?
     var playerItem: AVPlayerItem?
     var playerItemContext: Int = 0
+    
+    var tempAdWordLocation = [String: SCNVector3]()
+    var tempAdWords = [String]()
+    var uniqueUserIdForAdTargeting:String = ""
     
     // GAME
     
@@ -313,11 +318,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var floorNode:SCNNode?
     var draggingFrom:GamePosition? = nil
     var draggingFromPosition:SCNVector3? = nil
-    // from demo APP
-    // Use average of recent virtual object distances to avoid rapid changes in object scale.
-    var recentVirtualObjectDistances = [CGFloat]()
-    var tempAdWordLocation = [String: SCNVector3]()
-    var tempAdWords = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -351,6 +351,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         visionRequests = [classificationRequest]
 
         loopCoreMLUpdate()
+        
+        uniqueUserIdForAdTargeting = getUserId()
     }
     
     func scheduledTimerWithTimeInterval(){
@@ -380,8 +382,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @objc func invokeAdServer() {
         adTimeLimit -= 0.1
         if adTimeLimit <= 0 {
-            contactARADServer()
             adTimer.invalidate()
+            contactARADServer()
             scheduledDelayTimerWithTimeInterval()
         } else {
             countdownTimer.invalidate()
@@ -559,9 +561,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 if tappedNode.name == "snippet" {
                     tappedNode.isHidden = true
                     if let mainAd = self.sceneView.scene.rootNode.childNode(withName: "main", recursively: true) {
-                        self.captureReaction(adId: mainAd.parent!.name!, isClick: true)
                         mainAd.parent?.isHidden = false
+                        player?.play()
+                        self.captureReaction(adId: mainAd.parent!.name!, isClick: true)
                     }
+                } else if tappedNode.name == "main" {
+                    tappedNode.isHidden = true
+                    player?.pause()
                 }
             }
             sendVisionRequests = false
@@ -611,8 +617,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         latestPrediction = latestPrediction.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         if latestPrediction != "" && adWordsUsed[latestPrediction] == nil && !tempAdWords.contains(latestPrediction) {
             // Get Screen Centre
-            let screenCentre : CGPoint = CGPoint(x: self.sceneView.bounds.midX, y: self.sceneView.bounds.midY)
-            let results : [ARHitTestResult] = self.sceneView.hitTest(screenCentre, types: [.featurePoint])
+            let screenCenter : CGPoint = CGPoint(x: self.sceneView.bounds.midX, y: self.sceneView.bounds.midY)
+            let results : [ARHitTestResult] = self.sceneView.hitTest(screenCenter, types: [.featurePoint])
 
             if let closestResult = results.first {
                 // Get Coordinates of HitTest
@@ -627,7 +633,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
    
     func captureReaction(adId: String, isClick: Bool) {
         let parameters: Parameters = [
-            "id": adId,
+            "adId": adId,
             "is_click": isClick,
         ]
         Alamofire.request("https://api.arad.space/reaction", method: .post, parameters: parameters, encoding: JSONEncoding.default)
@@ -635,26 +641,41 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func makeRequest(keywords: [String]) {
+//        let customSerialQueue = DispatchQueue(label: "adrequestqueue")
+//        customSerialQueue.async {
+//            self.getAds(keywords: keywords)
+//        }
         DispatchQueue.global(qos: .default).async {
             self.getAds(keywords: keywords)
         }
     }
     
+    func getUserId() -> String {
+        var userId: String = ""
+        if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
+            userId = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        }
+        return userId
+    }
+    
+    var lock = NSLock()
+    
     func getAds(keywords: [String]) {
         //print("keywords")
         //print(keywords)
         let parameters: Parameters = [
-            "tags": keywords
+            "tags": keywords,
+            "ad_targeting_id": uniqueUserIdForAdTargeting
         ]
         Alamofire.request("https://api.arad.space/getads", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseJSON { response in
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+                DispatchQueue.global(qos: .background).async(flags: .barrier) {
                     print(response)
                     //to get status code
                     if let status = response.response?.statusCode {
                         switch(status) {
                         case 200:
-                            print("success")
+                            print("")
                         default:
                             print("not success")
                         }
@@ -667,6 +688,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                             print(adResult["link"] as! String)
                             
                             let adId = adResult["id"] as! String
+                            self.lock.lock()
                             if self.adIdSeen[adId] == nil {
                                 // Create 3D Text
                                 let topAdWord = adResult["requested_tag"] as! String
@@ -688,6 +710,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                             } else {
                                 print("ad already shown to user, ignore this one!")
                             }
+                            self.lock.unlock()
                         }
                     }
                     self.clearTempAdWords()
@@ -764,7 +787,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         player?.volume = 1.0
         player?.isMuted = false
         player?.automaticallyWaitsToMinimizeStalling = false
-        player?.play()
     }
 
     func getSpriteScene(newPlayer: AVPlayer) -> SKScene {
@@ -779,9 +801,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func getVideoMaterial() -> SCNMaterial {
         let videomaterial = SCNMaterial()
-        videomaterial.isDoubleSided = false
-        videomaterial.diffuse.contents = getSpriteScene(newPlayer: player!)
-        videomaterial.diffuse.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, -1, 1), 0, 1, 0)
+        videomaterial.isDoubleSided = true
+        videomaterial.emission.contents = getSpriteScene(newPlayer: player!)
+        videomaterial.emission.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, -1, 1), 0, 1, 0)
         return videomaterial
     }
     
@@ -793,17 +815,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let node = SCNNode()
         node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
         if contentType == "image" {
-            node.geometry?.firstMaterial?.diffuse.contents = mediaLink
+            node.geometry?.firstMaterial?.emission.contents = mediaLink
             node.geometry?.firstMaterial?.isDoubleSided = true
             node.geometry?.firstMaterial?.transparency = 0.85
-            node.scale = SCNVector3Make(0.04, 0.04, 0.04)
+            node.scale = SCNVector3Make(0.01, 0.01, 0.01)
         } else {
             let url:URL = URL.init(string: mediaLink)!
             // preparePlayerItem(url: url)
             playerItem = AVPlayerItem.init(url: url)
             initPlayer()
             node.geometry?.materials = [getVideoMaterial()]
-            node.scale = SCNVector3Make(0.04, 0.04, 0.04)
+            node.scale = SCNVector3Make(0.025, 0.025, 0.025)
         }
         node.name = name
 
@@ -820,7 +842,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let node = SCNNode()
         node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
-        node.geometry?.firstMaterial?.diffuse.contents = imageLink
+        node.geometry?.firstMaterial?.emission.contents = imageLink
         node.geometry?.firstMaterial?.isDoubleSided = true
         node.geometry?.firstMaterial?.transparency = 0.85
         node.scale = SCNVector3Make(0.02, 0.02, 0.02)
