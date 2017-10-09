@@ -35,6 +35,7 @@ def IndexHandler():
 def GetAds():
     data = json.loads(request.data)
     tags = data["tags"]
+    device_id = data["ad_targeting_id"]
     LOG.info(str(data))
 
     ret = []
@@ -136,6 +137,7 @@ def Edit(id):
     LOG.info(id)
     data = db.CreativeInfo(id)
     LOG.info(data)
+    data["tags"] = ','.join(data["tags"])
     return render_template('edit.html', data=data)
 
 
