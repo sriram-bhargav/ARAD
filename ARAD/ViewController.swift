@@ -654,6 +654,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return userId
     }
     
+    var lock = NSLock()
+    
     func getAds(keywords: [String]) {
         //print("keywords")
         //print(keywords)
@@ -663,13 +665,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         ]
         Alamofire.request("https://api.arad.space/getads", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseJSON { response in
-                DispatchQueue.global(qos: .background).async {
+                DispatchQueue.global(qos: .background).async(flags: .barrier) {
                     print(response)
                     //to get status code
                     if let status = response.response?.statusCode {
                         switch(status) {
                         case 200:
-                            print("success")
+                            print("")
                         default:
                             print("not success")
                         }
@@ -682,6 +684,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                             print(adResult["link"] as! String)
                             
                             let adId = adResult["id"] as! String
+                            self.lock.lock()
                             if self.adIdSeen[adId] == nil {
                                 // Create 3D Text
                                 let topAdWord = adResult["requested_tag"] as! String
@@ -703,6 +706,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                             } else {
                                 print("ad already shown to user, ignore this one!")
                             }
+                            self.lock.unlock()
                         }
                     }
                     self.clearTempAdWords()
@@ -801,8 +805,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func createMediaNode(mediaLink: String, name: String, id: String) -> SCNNode {
-        let billboardConstraint = SCNBillboardConstraint()
-        billboardConstraint.freeAxes = SCNBillboardAxis.Y
+        //let billboardConstraint = SCNBillboardConstraint()
+        //billboardConstraint.freeAxes = SCNBillboardAxis.Y
         let contentType = mediaType(link: mediaLink)
         print(contentType)
         let node = SCNNode()
@@ -824,14 +828,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         let nodeParent = SCNNode()
         nodeParent.addChildNode(node)
-        nodeParent.constraints = [billboardConstraint]
+        //nodeParent.constraints = [billboardConstraint]
         nodeParent.name = id
         return nodeParent
     }
     
     func createImageNode(imageLink: String, name: String, id: String) -> SCNNode {
-        let billboardConstraint = SCNBillboardConstraint()
-        billboardConstraint.freeAxes = SCNBillboardAxis.Y
+        //let billboardConstraint = SCNBillboardConstraint()
+        //billboardConstraint.freeAxes = SCNBillboardAxis.Y
         
         let node = SCNNode()
         node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
@@ -843,7 +847,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let nodeParent = SCNNode()
         nodeParent.addChildNode(node)
-        nodeParent.constraints = [billboardConstraint]
+        //nodeParent.constraints = [billboardConstraint]
         nodeParent.name = id
         return nodeParent
     }
