@@ -12,6 +12,7 @@ import Vision
 class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var planeSearchLabel: UILabel!
+    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var planeSearchOverlay: UIView!
     
     @IBOutlet weak var gameStateLabel: UILabel!
@@ -24,7 +25,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var visionRequests = [VNRequest]()
     let dispatchQueue = DispatchQueue(label: "") // A Serial Queue
-    let modelThreshold:Double = 0.20
+    let modelThreshold:Double = 0.01
     @IBOutlet weak var debugTextView: UITextView!
     
     var adWordsUsed = [String: Bool]()
@@ -86,8 +87,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             if (gameStateLabel == nil) {
                 return
             }
-            gameStateLabel.text = game.currentPlayer.rawValue + ":" + playerType[game.currentPlayer]!.rawValue.uppercased() + " to " + game.mode.rawValue
-            
+            gameStateLabel.text = game.currentPlayer.rawValue + ":" +
+                playerType[game.currentPlayer]!.rawValue.uppercased() + " to " + game.mode.rawValue
+        
             if let winner = game.currentWinner {
                 let alert = UIAlertController(title: "Game Over", message: "\(winner.rawValue) wins!!!!", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
@@ -353,6 +355,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         loopCoreMLUpdate()
         
         uniqueUserIdForAdTargeting = getUserId()
+        
+        bottomView.isHidden = true
+        debugTextView.isHidden = true
     }
     
     func scheduledTimerWithTimeInterval(){
@@ -804,6 +809,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         videomaterial.isDoubleSided = true
         videomaterial.emission.contents = getSpriteScene(newPlayer: player!)
         videomaterial.emission.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, -1, 1), 0, 1, 0)
+        print(videomaterial.emission.contentsTransform);
         return videomaterial
     }
     
@@ -813,7 +819,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let contentType = mediaType(link: mediaLink)
         print(contentType)
         let node = SCNNode()
-        node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
+        node.geometry = SCNPlane.init(width: 15, height: 10) // better set its size
         if contentType == "image" {
             node.geometry?.firstMaterial?.emission.contents = mediaLink
             node.geometry?.firstMaterial?.isDoubleSided = true
@@ -825,6 +831,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             playerItem = AVPlayerItem.init(url: url)
             initPlayer()
             node.geometry?.materials = [getVideoMaterial()]
+            node.position = SCNVector3(0, 0.1, 0)
             node.scale = SCNVector3Make(0.025, 0.025, 0.025)
         }
         node.name = name
@@ -841,12 +848,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
         
         let node = SCNNode()
-        node.geometry = SCNPlane.init(width: 20, height: 15) // better set its size
+        node.geometry = SCNSphere.init(radius: 1.5) // better set its size
         node.geometry?.firstMaterial?.emission.contents = imageLink
         node.geometry?.firstMaterial?.isDoubleSided = true
         node.geometry?.firstMaterial?.transparency = 0.85
+        //node.geometry?.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 0.85)
         node.scale = SCNVector3Make(0.02, 0.02, 0.02)
         node.name = name
+        node.position = SCNVector3(0, 0.1, 0)
         
         let nodeParent = SCNNode()
         nodeParent.addChildNode(node)
