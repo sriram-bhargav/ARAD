@@ -357,7 +357,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         uniqueUserIdForAdTargeting = getUserId()
         
         bottomView.isHidden = true
-        debugTextView.isHidden = true
+        debugTextView.isHidden = false
     }
     
     func scheduledTimerWithTimeInterval(){
@@ -831,7 +831,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             playerItem = AVPlayerItem.init(url: url)
             initPlayer()
             node.geometry?.materials = [getVideoMaterial()]
-            node.position = SCNVector3(0, 0.1, 0)
+            node.position = SCNVector3(0, 0.3, -0.5)
             node.scale = SCNVector3Make(0.025, 0.025, 0.025)
         }
         node.name = name
@@ -848,14 +848,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
         
         let node = SCNNode()
-        node.geometry = SCNSphere.init(radius: 1.5) // better set its size
+        node.geometry = SCNSphere.init(radius: 2.5) // better set its size
         node.geometry?.firstMaterial?.emission.contents = imageLink
         node.geometry?.firstMaterial?.isDoubleSided = true
-        node.geometry?.firstMaterial?.transparency = 0.85
+        node.geometry?.firstMaterial?.transparency = 0.65
         //node.geometry?.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 0.85)
         node.scale = SCNVector3Make(0.02, 0.02, 0.02)
         node.name = name
-        node.position = SCNVector3(0, 0.1, 0)
+        node.position = SCNVector3(0, 0.3, -0.5)
         
         let nodeParent = SCNNode()
         nodeParent.addChildNode(node)
