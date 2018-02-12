@@ -12,7 +12,6 @@ import Vision
 class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var planeSearchLabel: UILabel!
-    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var planeSearchOverlay: UIView!
     
     @IBOutlet weak var gameStateLabel: UILabel!
@@ -355,9 +354,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         loopCoreMLUpdate()
         
         uniqueUserIdForAdTargeting = getUserId()
-        
-        bottomView.isHidden = true
-        debugTextView.isHidden = false
+        self.debugTextView.isHidden = false
     }
     
     func scheduledTimerWithTimeInterval(){
@@ -876,7 +873,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         // Get Classifications
         let classifications = observations[0...1] // top 2 results
-            .flatMap({ $0 as? VNClassificationObservation })
+          .compactMap({ $0 as? VNClassificationObservation })
             .map({ "\($0.identifier) \(String(format:"- %.2f", $0.confidence))" })
             .joined(separator: "\n")
 
